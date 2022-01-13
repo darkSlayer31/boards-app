@@ -1,0 +1,37 @@
+.btn {
+    padding: 1rem;
+
+    border: $white 1px solid;
+    background-color: $blue;
+    color: $white;
+    border-radius: 4px;
+
+    transition: background .2s linear, color .2s linear, border .2s linear;
+
+    &:hover {
+        background-color: $white;
+        color: $black;
+        border-color: $blue;
+    }
+
+    // &--add-column {
+    //     background-color: lighten($blue, 10%);
+    // }
+
+    &--task {
+        width: 35px;
+        height: 35px;
+
+        background-color: $blue;
+        outline: 0;
+        border: 0;
+        border-radius: 4px;
+
+        transition: background .2s linear, border .2s linear;
+
+        &:hover {
+            background-color: $white;
+            border-color: $blue;
+        }
+    }
+}
