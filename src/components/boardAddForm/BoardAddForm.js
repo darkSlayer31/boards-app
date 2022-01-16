@@ -6,7 +6,7 @@ import { useHttp } from "../../hooks/http.hook";
 import { boardCreated } from "../../actions";
 
 
-const AddBoardForm = () => {
+const BoardAddForm = () => {
 
     const [boardName, setBoardName] = useState('');
     const dispatch = useDispatch();
@@ -16,8 +16,7 @@ const AddBoardForm = () => {
         e.preventDefault();
         const newBoard = {
             id: uuidv4(),
-            name: boardName,
-            columns: []
+            name: boardName
         }
 
         request("http://localhost:3001/boards", "POST", JSON.stringify(newBoard))
@@ -44,4 +43,4 @@ const AddBoardForm = () => {
     )
 }
 
-export default AddBoardForm;
+export default BoardAddForm;

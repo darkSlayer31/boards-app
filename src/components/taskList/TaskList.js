@@ -1,17 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { taskDeleted, setModalActive } from '../../actions';
+import { useHttp } from '../../hooks/http.hook';
 
 import './taskList.scss';
 import nextIcon from './arrow-next-icon.svg';
 import removeIcon from './delete-icon.svg';
 
-const TaskList = ({tasks, columnId, columnName}) => {
+const TaskList = ({columnId, columnName}) => {
 
-    const {activeBoard} = useSelector(state => state);
+    const {tasks} = useSelector(state => state);
 
     const dispatch = useDispatch();
+    const {request} = useHttp()
 
+    const filteredTasks = tasks.filter(item => item.parent === columnId)
+
+    const onDelete = (id) => {
+        request(`http://localhost:3001/tasks/${id}`, 'DELETE')
+            .then(data => console.log(data))
+            .then(dispatch(taskDeleted(id)))
+            .catch(err => console.log(err))
+    }
 
     const renderTaskList = (arr) => {
         if (arr.length === 0) {
@@ -29,12 +39,12 @@ const TaskList = ({tasks, columnId, columnName}) => {
         return arr.map(({id, ...props}) => {
             return (
                 <li className="task__item" key={id}>
-                    <div className="task__link" onClick={() => dispatch(setModalActive(true, {...props, columnName}))}>
+                    <div className="task__link" onClick={() => dispatch(setModalActive(true, {id, ...props, columnName}))}>
                         <h5 className="task__title">{props.name}</h5>
                     </div>
                     <div className="task__btns">
                         <button className="btn--task"
-                            onClick={() => dispatch(taskDeleted(activeBoard.id, columnId, id))} >
+                            onClick={() => onDelete(id)} >
                             <img src={removeIcon} alt="" className="task__icon"></img>
                         </button>
                         <button className="btn--task">
@@ -46,7 +56,7 @@ const TaskList = ({tasks, columnId, columnName}) => {
         })
     }
 
-    const elements = renderTaskList(tasks);
+    const elements = renderTaskList(filteredTasks);
 
     return (
         <ul className="task__list">

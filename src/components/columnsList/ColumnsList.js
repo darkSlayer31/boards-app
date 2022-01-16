@@ -1,6 +1,12 @@
+import { useSelector } from "react-redux";
+
 import ColumnsItem from "../columnsItem/ColumnsItem"
 
-const ColumnsList = ({columns}) => {
+const ColumnsList = ({boardId}) => {
+
+    const {columns} = useSelector(state => state)
+
+    const filteredColumns = columns.filter(item => item.parent === boardId);
 
     const renderColumnsList = (arr) => {
         if (arr.length === 0) {
@@ -14,7 +20,7 @@ const ColumnsList = ({columns}) => {
         })
     }
 
-    const elements = renderColumnsList(columns)
+    const elements = renderColumnsList(filteredColumns)
 
     return (
         <>

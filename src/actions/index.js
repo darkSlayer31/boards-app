@@ -24,6 +24,63 @@ export const boardsFetchingError = () => {
     }
 }
 
+export const columnsFetching = () => {
+    return {
+        type: 'COLUMNS_FETCHING'
+    }
+}
+
+export const columnsFetched = (columns) => {
+    return {
+        type: 'COLUMNS_FETCHED',
+        payload: columns
+    }
+}
+
+export const columnsFetchingError = () => {
+    return {
+        type: 'COLUMNS_FETCHING_ERROR'
+    }
+}
+
+export const tasksFetching = () => {
+    return {
+        type: 'TASKS_FETCHING'
+    }
+}
+
+export const tasksFetched = (tasks) => {
+    return {
+        type: 'TASKS_FETCHED',
+        payload: tasks
+    }
+}
+
+export const tasksFetchingError = () => {
+    return {
+        type: 'TASKS_FETCHING_ERROR'
+    }
+}
+
+export const commentsFetching = () => {
+    return {
+        type: 'COMMENTS_FETCHING'
+    }
+}
+
+export const commentsFetched = (comments) => {
+    return {
+        type: 'COMMENTS_FETCHED',
+        payload: comments
+    }
+}
+
+export const commentsFetchingError = () => {
+    return {
+        type: 'COMMENTS_FETCHING_ERROR'
+    }
+}
+
 export const boardCreated = (newBoard) => {
     return {
         type: 'BOARD_CREATED',
@@ -52,30 +109,37 @@ export const activeBoardChanged = (boardId) => {
     }
 }
 
-export const columnCreated = (id, newColumn) => {
+export const columnCreated = (newColumn) => {
     return {
         type: 'COLUMN_CREATED',
-        payload: {id, newColumn}
+        payload: newColumn
     }
 }
 
-export const columnDeleted = (boardId, columnId) => {
+export const columnDeleted = (columnId) => {
     return {
         type: 'COLUMN_DELETED',
-        payload: {boardId, columnId}
+        payload: columnId
     }
 }
 
-export const taskCreated = (boardId, columnId, newTask) => {
+export const taskCreated = (newTask) => {
     return {
         type: 'TASK_CREATED',
-        payload: {boardId, columnId, newTask}
+        payload: newTask
     }
 }
 
-export const taskDeleted = (boardId, columnId, taskId) => {
+export const taskDeleted = (taskId) => {
     return {
         type: 'TASK_DELETED',
-        payload: {boardId, columnId, taskId}
+        payload: taskId
+    }
+}
+
+export const commentCreated = (newComment) => {
+    return {
+        type: 'COMMENT_CREATED',
+        payload: newComment
     }
 }

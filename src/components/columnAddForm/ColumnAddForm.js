@@ -6,7 +6,7 @@ import { useHttp } from "../../hooks/http.hook";
 import { columnCreated } from "../../actions";
 
 
-const AddColumnForm = () => {
+const ColumnAddForm = () => {
 
     const activeBoardId = useSelector(state => state.activeBoard.id)
     const [columnName, setColumnName] = useState('');
@@ -18,12 +18,12 @@ const AddColumnForm = () => {
         const newColumn = {
             id: uuidv4(),
             name: columnName,
-            tasks: []
+            parent: activeBoardId
         }
 
-        request(`http://localhost:3001/boards/${activeBoardId}/columns`, "POST", JSON.stringify(newColumn))
+        request(`http://localhost:3001/columns`, "POST", JSON.stringify(newColumn))
             .then(res => console.log(res, "Отправка успешна"))
-            .then(dispatch(columnCreated(activeBoardId, newColumn)))
+            .then(dispatch(columnCreated(newColumn)))
             .catch(err => console.log(err));
 
         //dispatch(columnCreated(activeBoardId, newColumn))
@@ -51,4 +51,4 @@ const AddColumnForm = () => {
     )
 }
 
-export default AddColumnForm;
+export default ColumnAddForm;

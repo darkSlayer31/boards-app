@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
+import { useHttp } from "../../hooks/http.hook";
 
 import { taskCreated } from "../../actions";
 
 
 const TaskAddForm = ({columnId}) => {
 
-    const activeBoardId = useSelector(state => state.activeBoard.id)
     const [taskName, setTaskName] = useState('');
     const dispatch = useDispatch();
+    const {request} = useHttp();
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -18,10 +19,13 @@ const TaskAddForm = ({columnId}) => {
             name: taskName,
             author: 'author',
             descr: '',
-            comments: []
+            parent: columnId
         }
 
-        dispatch(taskCreated(activeBoardId, columnId, newTask))
+        request(`http://localhost:3001/tasks`, 'POST', JSON.stringify(newTask))
+            .then(res => console.log(res, 'Отправка успешна'))
+            .then(dispatch(taskCreated(newTask)))
+            .catch(err => console.log(err));
 
         setTaskName("");
     }

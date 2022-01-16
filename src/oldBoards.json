@@ -1,0 +1,134 @@
+{
+    "boards": [
+            {
+              "id": 1,
+              "name": "board 1",
+              "columns": [
+                {
+                  "id": 1,
+                  "name": "column 1",
+                  "tasks": [
+                    {
+                      "id": 1,
+                      "name": "task 1",
+                      "author": "author name",
+                      "descr": "descr",
+                      "comments": [
+                        {
+                          "text": "text",
+                          "authoe": "comment author"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 2,
+                      "name": "task 2",
+                      "author": "author name",
+                      "descr": "descr",
+                      "comments": [
+                        {
+                          "text": "text",
+                          "authoe": "comment author"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "column 2",
+                  "tasks": [
+                    {
+                      "id": 1,
+                      "name": "task 1",
+                      "author": "author name",
+                      "descr": "descr",
+                      "comments": [
+                        {
+                          "text": "text",
+                          "authoe": "comment author"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 2,
+                      "name": "task 2",
+                      "author": "author name",
+                      "descr": "descr",
+                      "comments": [
+                        {
+                          "text": "text",
+                          "authoe": "comment author"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "name": "board 2",
+              "columns": [
+                {
+                  "id": 1,
+                  "name": "column 3",
+                  "tasks": [
+                    {
+                      "id": 1,
+                      "name": "task 1",
+                      "author": "author name",
+                      "descr": "descr",
+                      "comments": [
+                        {
+                          "text": "text",
+                          "authoe": "comment author"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 2,
+                      "name": "task 3",
+                      "author": "author name",
+                      "descr": "descr",
+                      "comments": [
+                        {
+                          "text": "text",
+                          "authoe": "comment author"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "column 4",
+                  "tasks": [
+                    {
+                      "id": 1,
+                      "name": "task 1",
+                      "author": "author name",
+                      "descr": "descr",
+                      "comments": [
+                        {
+                          "text": "text",
+                          "authoe": "comment author"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "34902d1b-8397-4c6a-92ac-ab6950c5e45c",
+              "name": "board22",
+              "columns": []
+            },
+            {
+              "id": "c7f61197-8b41-46a0-bad7-5593a8480248",
+              "name": "dddd1",
+              "columns": []
+            }
+        ]
+}

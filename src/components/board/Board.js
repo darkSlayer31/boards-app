@@ -1,6 +1,6 @@
 import { useSelector} from 'react-redux';
 
-import AddColumnForm from '../addColumnForm/AddColumnForm';
+import ColumnAddForm from '../columnAddForm/ColumnAddForm';
 import ColumnsList from '../columnsList/ColumnsList';
 import BoardRenameForm from '../boardRenameForm/BoardRenameForm';
 
@@ -17,10 +17,9 @@ const Board = () => {
     return (
         <>
             <BoardRenameForm/>
-
             <div className="columns">
-                <ColumnsList columns = {activeBoard.columns}/>
-                <AddColumnForm/>
+                <ColumnsList boardId= {activeBoard.id}/>
+                <ColumnAddForm/>
             </div>
         </>
     )

@@ -1,5 +1,8 @@
 import { useSelector } from "react-redux";
 
+import CommentsList from "../commentsList/CommentsList";
+import CommentsAddForm from "../commentsAddForm/CommentsAddForm";
+
 const TaskModal = () => {
     const {activeTask, activeBoard} = useSelector(state => state)
 
@@ -19,23 +22,8 @@ const TaskModal = () => {
 
             <h3 className="task__subtitle">Комментарии:</h3>
 
-            <form className="form" action="/" method="post">
-                <div className="form__group">
-                    <textarea className="form__control form__control--textarea" name="comment-text" placeholder="Текст комментария" data-autoresize></textarea>
-                </div>
-                <button className="btn" type="submit">Отправить</button>
-            </form>
-            <ul className="comments">
-                <li className="comments__item">
-                    <div className="comments__header">
-                        <div className="comments__author">
-                            <div className="comments__name">Виктор Копань</div>
-                        </div>
-                    </div>
-                    <div className="comments__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est temporibus aliquam alias deleniti hic, ratione nihil. Recusandae ipsam repudiandae, aut quae hic. Doloribus consectetur ducimus cumque eum, voluptatibus provident nam.</div>
-                    <button className="comments__reply" type="button">изменить</button>
-                </li>
-            </ul>
+            <CommentsAddForm taskId={activeTask.id}/>
+            <CommentsList taskId={activeTask.id}/>
         </>
     )
 }

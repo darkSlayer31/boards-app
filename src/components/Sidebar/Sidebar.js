@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {useHttp} from '../../hooks/http.hook';
-import { boardsFetched, boardsFetching, boardsFetchingError, boardDeleted, activeBoardChanged } from '../../actions';
-import AddBoardForm from '../addBoardForm/AddBoardForm';
+import { boardsFetched, boardsFetching, boardsFetchingError, boardDeleted, activeBoardChanged, tasksFetched,
+tasksFetchingError, columnsFetched, columnsFetchingError, commentsFetched, commentsFetchingError } from '../../actions';
+import BoardAddForm from '../boardAddForm/BoardAddForm';
 import Spinner from '../spinner/Spinner';
 
 
@@ -21,7 +22,15 @@ const Sidebar = () => {
         request("http://localhost:3001/boards")
             .then(data => dispatch(boardsFetched(data)))
             .catch((err) => dispatch(boardsFetchingError()))
-
+        request("http://localhost:3001/columns")
+            .then(data => dispatch(columnsFetched(data)))
+            .catch((err) => dispatch(columnsFetchingError()))
+        request("http://localhost:3001/tasks")
+            .then(data => dispatch(tasksFetched(data)))
+            .catch((err) => dispatch(tasksFetchingError()))
+        request("http://localhost:3001/comments")
+            .then(data => dispatch(commentsFetched(data)))
+            .catch((err) => dispatch(commentsFetchingError()))
             // eslint-disable-next-line
     }, [])
 
@@ -72,7 +81,7 @@ const Sidebar = () => {
                 <ul className="boards__list">
                     {elements}
                 </ul>
-                <AddBoardForm/>
+                <BoardAddForm/>
             </div>
         </aside>
     )

@@ -2,133 +2,126 @@
   "boards": [
     {
       "id": 1,
-      "name": "board 1",
-      "columns": [
-        {
-          "id": 1,
-          "name": "column 1",
-          "tasks": [
-            {
-              "id": 1,
-              "name": "task 1",
-              "author": "author name",
-              "descr": "descr",
-              "comments": [
-                {
-                  "text": "text",
-                  "authoe": "comment author"
-                }
-              ]
-            },
-            {
-              "id": 2,
-              "name": "task 2",
-              "author": "author name",
-              "descr": "descr",
-              "comments": [
-                {
-                  "text": "text",
-                  "authoe": "comment author"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "name": "column 2",
-          "tasks": [
-            {
-              "id": 1,
-              "name": "task 1",
-              "author": "author name",
-              "descr": "descr",
-              "comments": [
-                {
-                  "text": "text",
-                  "authoe": "comment author"
-                }
-              ]
-            },
-            {
-              "id": 2,
-              "name": "task 2",
-              "author": "author name",
-              "descr": "descr",
-              "comments": [
-                {
-                  "text": "text",
-                  "authoe": "comment author"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "name": "board 1"
     },
     {
-      "id": 2,
-      "name": "board 2",
-      "columns": [
-        {
-          "id": 1,
-          "name": "column 3",
-          "tasks": [
-            {
-              "id": 1,
-              "name": "task 1",
-              "author": "author name",
-              "descr": "descr",
-              "comments": [
-                {
-                  "text": "text",
-                  "authoe": "comment author"
-                }
-              ]
-            },
-            {
-              "id": 2,
-              "name": "task 3",
-              "author": "author name",
-              "descr": "descr",
-              "comments": [
-                {
-                  "text": "text",
-                  "authoe": "comment author"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "name": "column 4",
-          "tasks": [
-            {
-              "id": 1,
-              "name": "task 1",
-              "author": "author name",
-              "descr": "descr",
-              "comments": [
-                {
-                  "text": "text",
-                  "authoe": "comment author"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "id": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b",
+      "name": "board 3"
     },
     {
-      "id": "34902d1b-8397-4c6a-92ac-ab6950c5e45c",
-      "name": "board22",
-      "columns": []
+      "id": "c61cf027-099f-43d7-b98b-447b9b8b474f",
+      "name": "board 4"
+    }
+  ],
+  "columns": [
+    {
+      "id": 11,
+      "name": "column 1",
+      "parent": 1
     },
     {
-      "id": "c7f61197-8b41-46a0-bad7-5593a8480248",
-      "name": "dddd1",
-      "columns": []
+      "id": 22,
+      "name": "column 2",
+      "parent": 2
+    },
+    {
+      "id": 33,
+      "name": "column 3",
+      "parent": 2
+    },
+    {
+      "id": "37ac66a4-3f74-4a11-a3e5-c7ba60f059d4",
+      "name": "fff",
+      "parent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
+    },
+    {
+      "id": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2",
+      "name": "column 3",
+      "parent": "c61cf027-099f-43d7-b98b-447b9b8b474f"
+    },
+    {
+      "id": "3234f2ee-82f8-4075-819c-6fe3e8796b3a",
+      "name": "column 4",
+      "parent": "c61cf027-099f-43d7-b98b-447b9b8b474f"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 111,
+      "name": "task 1",
+      "author": "author name",
+      "descr": "descr",
+      "parent": 11
+    },
+    {
+      "id": 222,
+      "name": "task 2",
+      "author": "author name",
+      "descr": "descr",
+      "parent": 22
+    },
+    {
+      "id": 333,
+      "name": "task 3",
+      "author": "author name",
+      "descr": "descr",
+      "parent": 33
+    },
+    {
+      "id": "288e329c-58bb-49c7-ab0d-e85fe88f0df5",
+      "name": "123",
+      "author": "author",
+      "descr": "",
+      "parent": "37ac66a4-3f74-4a11-a3e5-c7ba60f059d4"
+    },
+    {
+      "id": "b3e33d64-c7e0-4c29-9309-98d35dab2e0b",
+      "name": "task 2",
+      "author": "author",
+      "descr": "",
+      "parent": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2"
+    },
+    {
+      "id": "82581cb8-18e9-4765-889c-0db6207b07ac",
+      "name": "task 3",
+      "author": "author",
+      "descr": "",
+      "parent": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2"
+    },
+    {
+      "id": "afb6b302-e2e8-4c7d-b3f0-e942586055b9",
+      "name": "task 4",
+      "author": "author",
+      "descr": "",
+      "parent": "3234f2ee-82f8-4075-819c-6fe3e8796b3a"
+    },
+    {
+      "id": "15c164df-a723-4b29-a92c-2f339cc4e155",
+      "name": "111",
+      "author": "author",
+      "descr": "",
+      "parent": "4077dabf-5348-4d1c-874a-f16a90a0edab"
+    },
+    {
+      "id": "4f290d3a-f6cc-4202-a7a7-9f6d13e77e01",
+      "name": "2222",
+      "author": "author",
+      "descr": "",
+      "parent": "4077dabf-5348-4d1c-874a-f16a90a0edab"
+    }
+  ],
+  "comments": [
+    {
+      "id": "0eaa5754-4c36-4c13-bcec-20217435b16d",
+      "text": "comment 1",
+      "author": "Виктор",
+      "parent": 111
+    },
+    {
+      "id": "04b16a4f-b8b6-42c9-a74b-b87794fa38eb",
+      "text": "comment 2 авдлапвдлп плвдж плваджлп джвалджплвадж плвдж",
+      "author": "Виктор",
+      "parent": 111
     }
   ]
 }

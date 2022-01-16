@@ -1,11 +1,13 @@
 const initialState = {
     boards: [],
+    columns: [],
+    tasks: [],
+    comments: [],
     activeBoard: null,
     boardsLoadingStatus: 'idle',
     modalActive: false,
     activeTask: null
 }
-
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -27,6 +29,54 @@ const reducer = (state = initialState, action) => {
                 boardsLoadingStatus: 'idle'
             }
         case 'BOADRS_FETCHING_ERROR':
+            return {
+                ...state,
+                boardsLoadingStatus: 'error'
+            }
+            case 'COLUMNS_FETCHING':
+            return {
+                ...state,
+                boardsLoadingStatus: 'loading'
+            }
+        case 'COLUMNS_FETCHED':
+            return {
+                ...state,
+                columns: action.payload,
+                boardsLoadingStatus: 'idle'
+            }
+        case 'COLUMNS_FETCHING_ERROR':
+            return {
+                ...state,
+                boardsLoadingStatus: 'error'
+            }
+        case 'TASKS_FETCHING':
+            return {
+                ...state,
+                boardsLoadingStatus: 'loading'
+            }
+        case 'TASKS_FETCHED':
+            return {
+                ...state,
+                tasks: action.payload,
+                boardsLoadingStatus: 'idle'
+            }
+        case 'TASKS_FETCHING_ERROR':
+            return {
+                ...state,
+                boardsLoadingStatus: 'error'
+            }
+            case 'COMMENTS_FETCHING':
+            return {
+                ...state,
+                boardsLoadingStatus: 'loading'
+            }
+        case 'COMMENTS_FETCHED':
+            return {
+                ...state,
+                comments: action.payload,
+                boardsLoadingStatus: 'idle'
+            }
+        case 'COMMENTS_FETCHING_ERROR':
             return {
                 ...state,
                 boardsLoadingStatus: 'error'
@@ -54,110 +104,37 @@ const reducer = (state = initialState, action) => {
                     ...state.activeBoard,
                     name: action.payload.newName
                 }
-
             }
         case 'ACTIVE_BOARD_CHANGED':
             return {
                 ...state,
                 activeBoard: state.boards.find(item => item.id === action.payload)
             }
-
         case 'COLUMN_CREATED':
             return {
                 ...state,
-                activeBoard: {
-                    ...state.activeBoard,
-                    columns: [...state.activeBoard.columns, action.payload.newColumn]
-                },
-                boards: state.boards.map(item => {
-                    if (item.id === action.payload.id) {
-                        return {
-                            ...item,
-                            columns: [...item.columns, action.payload.newColumn]}
-                    }
-                    return item
-                }),
+                columns: [...state.columns, action.payload]
             }
         case 'COLUMN_DELETED':
             return {
                 ...state,
-                activeBoard: {
-                    ...state.activeBoard,
-                    columns: state.activeBoard.columns.filter(item => item.id !== action.payload.columnId)
-                },
-                boards: state.boards.map(board => {
-                    if (board.id === action.payload.boardId) {
-                        return {
-                            ...board,
-                            columns: board.columns.filter(item => item.id !== action.payload.columnId)
-                        }
-                    }
-                    return board
-                })
+                columns: state.columns.filter(item => item.id !== action.payload)
             }
         case 'TASK_CREATED':
             return {
                 ...state,
-                boards: state.boards.map(board => {
-                    if (board.id === action.payload.boardId) {
-                        return {
-                            ...board,
-                            columns: board.columns.map(column => {
-                                if (column.id === action.payload.columnId) {
-                                    return {
-                                        ...column,
-                                        tasks: [...column.tasks, action.payload.newTask]
-                                    }
-                                }
-                                return column
-                            })}
-                    }
-                    return board
-                }),
-                activeBoard: {
-                    ...state.activeBoard,
-                    columns: state.activeBoard.columns.map(column => {
-                        if (column.id === action.payload.columnId) {
-                            return {
-                                ...column,
-                                tasks: [...column.tasks, action.payload.newTask]
-                            }
-                        }
-                        return column
-                    })
-                }
+                tasks: [...state.tasks, action.payload]
             }
         case 'TASK_DELETED':
             return {
                 ...state,
-                activeBoard: {
-                    ...state.activeBoard,
-                    columns: state.activeBoard.columns.map(column => {
-                        if (column.id === action.payload.columnId) {
-                            return {
-                                ...column,
-                                tasks: column.tasks.filter(item => item.id !== action.payload.taskId)
-                            }
-                        }
-                        return column
-                    })
-                },
-                boards: state.boards.map(board => {
-                    if (board.id === action.payload.boardId) {
-                        return {
-                            ...board,
-                            columns: board.columns.map(column => {
-                                if (column.id === action.payload.columnId) {
-                                    return {
-                                        ...column,
-                                        tasks: column.tasks.filter(item => item.id !== action.payload.taskId)
-                                    }
-                                }
-                                return column
-                            })}
-                        }
-                    return board
-                })
+                tasks: state.tasks.filter(item => item.id !== action.payload)
+            }
+
+        case 'COMMENT_CREATED':
+            return {
+                ...state,
+                comments: [...state.comments, action.payload]
             }
         default: return state
     }
