@@ -1,3 +1,17 @@
+export const userAdded = (user) => {
+    return {
+        type: 'USER_ADDED',
+        payload: user
+    }
+}
+
+export const activeUserChanged = (user) => {
+    return {
+        type: "ACTIVE_USER_CHANGED",
+        payload: user
+    }
+}
+
 export const setModalActive = (modalActive, activeTask) => {
     return {
         type: 'SET_MODAL_ACTIVE',

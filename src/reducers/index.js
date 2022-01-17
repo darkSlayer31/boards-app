@@ -1,4 +1,5 @@
 const initialState = {
+    users: [],
     boards: [],
     columns: [],
     tasks: [],
@@ -6,11 +7,28 @@ const initialState = {
     activeBoard: null,
     boardsLoadingStatus: 'idle',
     modalActive: false,
-    activeTask: null
+    activeTask: null,
+    activeUser: null
 }
+
+function inArray(arr) {
+    return function(x) {
+      return !arr.includes(x);
+    };
+  }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'USER_ADDED':
+            return {
+                ...state,
+                users: [...state.users, action.payload]
+            }
+        case 'ACTIVE_USER_CHANGED':
+            return {
+                ...state,
+                activeUser: action.payload.name
+            }
         case 'SET_MODAL_ACTIVE':
             return {
                 ...state,
@@ -129,6 +147,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: state.tasks.filter(item => item.id !== action.payload)
+                //tasks: state.tasks.filter(inArray(action.payload))
             }
 
         case 'COMMENT_CREATED':

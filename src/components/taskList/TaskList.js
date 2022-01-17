@@ -21,6 +21,7 @@ const TaskList = ({columnId, columnName}) => {
             .then(data => console.log(data))
             .then(dispatch(taskDeleted(id)))
             .catch(err => console.log(err))
+        //dispatch(taskDeleted(id))
     }
 
     const renderTaskList = (arr) => {

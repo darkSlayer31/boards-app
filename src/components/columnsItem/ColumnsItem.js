@@ -20,7 +20,8 @@ const ColumnsItem = (props) => {
             .then(data => console.log(data))
             .then(dispatch(columnDeleted(id)))
             .catch(err => console.log(err))
-        dispatch(taskDeleted(deletedTasks))
+        // dispatch(columnDeleted(id));
+        // dispatch(taskDeleted(deletedTasks));
     }
 
     return (
