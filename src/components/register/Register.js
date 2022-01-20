@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import validator from "validator"
 import { v4 as uuidv4 } from "uuid";
 
-import { activeUserChanged, userAdded } from "../../actions";
+import { userAdded } from "../../actions";
 import { useHttp } from "../../hooks/http.hook";
 
 import './register.scss';
@@ -50,10 +50,18 @@ const Register = () => {
         } else {
             //ДОЛЖНА БЫТЬ ПРОВЕРКА ЕСТЬ ЛИ УЖЕ ТАКОЙ ПОЛЬЗОВАТЕЛЬ
             console.log(user, "успешно")
-            // request("http://localhost:3001/users", "POST", JSON.stringify(user))
-            //     .then(res => console.log(res, "Отправка успешна"))
-            //     .then(dispatch(userAdded(user)))
-            //     .catch(err => console.log(err))
+            request("http://localhost:3001/users", "POST", JSON.stringify(user))
+                .then(res => console.log(res, "Отправка успешна"))
+                .then(dispatch(userAdded(user)))
+                .then(alert('Вы зарегистрированы'))
+                .catch(err => console.log(err))
+
+            setRegister({
+                username: "",
+                email: "",
+                password: "",
+                password2: "",
+            })
         }
     }
 

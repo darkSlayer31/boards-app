@@ -1,13 +1,51 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react';
+
+import { commentDeleted, commentChanged } from '../../actions';
+import { useHttp } from '../../hooks/http.hook';
 
 import './commentsList.scss'
 
 const CommentsList = ({taskId}) => {
 
-    const comments = useSelector(state => state.comments);
+    const {request} = useHttp();
+    const dispatch = useDispatch()
+    const {comments, activeUser} = useSelector(state => state);
     const filteredComments = comments.filter(item => item.parent === taskId);
-    console.log(filteredComments);
 
+    const [editComment, setEditComment] = useState(() => {
+        return {
+            show: false,
+            id: null
+        }
+    })
+
+    const [commentText, setCommentText] = useState('');
+
+    const onDelete = (id, author) => {
+        if (activeUser.username !== author) {
+            alert('Вы не можете удалить чужой комментарий')
+        } else {
+            request(`http://localhost:3001/comments/${id}`, 'DELETE')
+                .then(dispatch(commentDeleted(id)))
+                .then(console.log('коммент удален'))
+                .catch(err => console.log(err))
+        }
+    }
+
+    const onChangeComment = (id, text) => {
+        const comment = comments.find(item => item.id === id)
+        const newComment = {
+            ...comment,
+            text
+        }
+
+        request(`http://localhost:3001/comments/${id}`, "PUT", JSON.stringify(newComment))
+            .then(dispatch(commentChanged(id, text)))
+            .catch(err => console.log(err))
+
+        setEditComment({show: false, id: null})
+    }
 
     const renderComments = (arr) => {
         if (arr.length === 0) {
@@ -22,16 +60,29 @@ const CommentsList = ({taskId}) => {
                             <div className="comments__name">{author}</div>
                         </div>
                     </div>
-                    <div className="comments__text">{text}</div>
-                    <button className="comments__reply" type="button">изменить</button>
+
+                    { (editComment.show && editComment.id === id)
+                        ? <input className="comments__text" defaultValue={text} onChange={(e) => setCommentText(e.target.value)}></input>
+                        : <p className="comments__text">{text}</p>
+                    }
+
+                    { (activeUser.username === author && !editComment.show) && (
+                        <>
+                            <button className="comments__reply" type="button" onClick={() => setEditComment({show: true, id: id})}>изменить</button>
+                            <button className="comments__reply" type="button" onClick={() => onDelete(id, author)}>удалить</button>
+                        </>
+                    )}
+
+                    { (editComment.show && author === activeUser.username && editComment.id === id) && (
+                        <button className="comments__reply" type="button" onClick={() => onChangeComment(id, commentText)}>подтвердить</button>
+                    )}
+
                 </li>
             )
         })
     }
 
     const elements = renderComments(filteredComments)
-    console.log(elements)
-
 
     return (
         <ul className="comments">

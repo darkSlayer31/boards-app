@@ -8,7 +8,7 @@ import { columnCreated } from "../../actions";
 
 const ColumnAddForm = () => {
 
-    const activeBoardId = useSelector(state => state.activeBoard.id)
+    const {activeBoardId} = useSelector(state => state)
     const [columnName, setColumnName] = useState('');
     const dispatch = useDispatch();
     const {request} = useHttp();
@@ -26,7 +26,7 @@ const ColumnAddForm = () => {
             .then(dispatch(columnCreated(newColumn)))
             .catch(err => console.log(err));
 
-        //dispatch(columnCreated(activeBoardId, newColumn))
+        //dispatch(columnCreated(newColumn))
 
         setColumnName("");
     }

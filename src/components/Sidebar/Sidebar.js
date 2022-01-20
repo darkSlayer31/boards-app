@@ -1,9 +1,7 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {useHttp} from '../../hooks/http.hook';
-import { boardsFetched, boardsFetching, boardsFetchingError, boardDeleted, activeBoardChanged, tasksFetched,
-tasksFetchingError, columnsFetched, columnsFetchingError, commentsFetched, commentsFetchingError } from '../../actions';
+import {boardDeleted, activeBoardChanged} from '../../actions';
 import BoardAddForm from '../boardAddForm/BoardAddForm';
 import Spinner from '../spinner/Spinner';
 
@@ -12,33 +10,20 @@ import './sidebar.scss';
 
 const Sidebar = () => {
 
-    const {boards, boardsLoadingStatus} = useSelector(state => state);
+    const {boards, boardsLoadingStatus, columns} = useSelector(state => state);
 
     const {request} = useHttp();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(boardsFetching());
-        request("http://localhost:3001/boards")
-            .then(data => dispatch(boardsFetched(data)))
-            .catch((err) => dispatch(boardsFetchingError()))
-        request("http://localhost:3001/columns")
-            .then(data => dispatch(columnsFetched(data)))
-            .catch((err) => dispatch(columnsFetchingError()))
-        request("http://localhost:3001/tasks")
-            .then(data => dispatch(tasksFetched(data)))
-            .catch((err) => dispatch(tasksFetchingError()))
-        request("http://localhost:3001/comments")
-            .then(data => dispatch(commentsFetched(data)))
-            .catch((err) => dispatch(commentsFetchingError()))
-            // eslint-disable-next-line
-    }, [])
-
     const onDelete = (id) => {
-        request(`http://localhost:3001/boards/${id}`, 'DELETE')
-            .then(data => console.log(data, "Deleted"))
-            .then(dispatch(boardDeleted(id)))
-            .catch(err => console.log(err))
+        const deletedColumns = columns.filter(item => item.parent === id)
+        // request(`http://localhost:3001/boards/${id}`, 'DELETE')
+        //     .then(data => console.log(data, "Deleted"))
+        //     .then(dispatch(boardDeleted(id)))
+        //     .catch(err => console.log(err))
+
+        dispatch(boardDeleted(id))
+        dispatch(activeBoardChanged(null))
     }
 
     if (boardsLoadingStatus === "loading") {

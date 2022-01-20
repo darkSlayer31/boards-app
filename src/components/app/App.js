@@ -1,21 +1,47 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useHttp } from "../../hooks/http.hook";
 
-import Register from "../register/Register";
-import AppHeader from "../appHeader/AppHeader";
+import AppHeader from "../appHeader";
 import Sidebar from "../Sidebar/Sidebar";
 import Board from "../board/Board";
 import Modal from "../modal/Modal";
 import TaskModal from "../taskModal/TaskModal";
+import Authorization from "../authorization/Authorization";
+import {boardsFetched, boardsFetching, boardsFetchingError, tasksFetched,
+    tasksFetchingError, columnsFetched, columnsFetchingError, commentsFetched, commentsFetchingError, usersFetched } from '../../actions';
 
 import "./app.scss"
 
 const App = () => {
 
     const {activeTask, activeUser} = useSelector(state => state)
+    const dispatch = useDispatch();
+    const {request} = useHttp();
+
+    useEffect(() => {
+        dispatch(boardsFetching());
+        request("http://localhost:3001/boards")
+            .then(data => dispatch(boardsFetched(data)))
+            .catch(() => dispatch(boardsFetchingError()))
+        request("http://localhost:3001/columns")
+            .then(data => dispatch(columnsFetched(data)))
+            .catch(() => dispatch(columnsFetchingError()))
+        request("http://localhost:3001/tasks")
+            .then(data => dispatch(tasksFetched(data)))
+            .catch(() => dispatch(tasksFetchingError()))
+        request("http://localhost:3001/comments")
+            .then(data => dispatch(commentsFetched(data)))
+            .catch(() => dispatch(commentsFetchingError()))
+        request("http://localhost:3001/users")
+            .then(data => dispatch(usersFetched(data)))
+            .catch(() => dispatch(boardsFetchingError()))
+            // eslint-disable-next-line
+    }, [])
 
     return (
         <>
-            {/* {activeUser ?
+            {activeUser ?
             <>
                 <AppHeader/>
                 <div className="app">
@@ -26,23 +52,14 @@ const App = () => {
                         </div>
                     </div>
                 </div>
-                <Modal>
-                    {activeTask ? <TaskModal /> : null}
-                </Modal>
-            </> : <Register/>} */}
-            <Register/>
-            <AppHeader/>
-            <div className="app">
-                <div className="app__wrapper">
-                    <Sidebar/>
-                    <div className="workspace">
-                        <Board/>
-                    </div>
-                </div>
-            </div>
-            <Modal>
-                {activeTask ? <TaskModal /> : null}
-            </Modal>
+                {activeTask && (
+                    <Modal>
+                        <TaskModal />
+                    </Modal>
+                )}
+            </>
+            :
+            <Authorization/>}
         </>
 
     );

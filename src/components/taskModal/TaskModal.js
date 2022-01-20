@@ -4,7 +4,8 @@ import CommentsList from "../commentsList/CommentsList";
 import CommentsAddForm from "../commentsAddForm/CommentsAddForm";
 
 const TaskModal = () => {
-    const {activeTask, activeBoard} = useSelector(state => state)
+    const {activeTask, activeBoardId, boards} = useSelector(state => state);
+    const activeBoard = boards.find(item => item.id === activeBoardId);
 
     return (
         <>
@@ -22,7 +23,7 @@ const TaskModal = () => {
 
             <h3 className="task__subtitle">Комментарии:</h3>
 
-            <CommentsAddForm taskId={activeTask.id}/>
+            <CommentsAddForm taskId={activeTask.id} taskParent={activeTask.parent}/>
             <CommentsList taskId={activeTask.id}/>
         </>
     )

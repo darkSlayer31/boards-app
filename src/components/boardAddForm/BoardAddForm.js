@@ -19,11 +19,13 @@ const BoardAddForm = () => {
             name: boardName
         }
 
-        request("http://localhost:3001/boards", "POST", JSON.stringify(newBoard))
-            .then(res => console.log(res, "Отправка успешна"))
-            .then(dispatch(boardCreated(newBoard)))
-            .catch(err => console.log(err));
+        // request("http://localhost:3001/boards", "POST", JSON.stringify(newBoard))
+        //     .then(res => console.log(res, "Отправка успешна"))
+        //     .then(dispatch(boardCreated(newBoard)))
+        //     .catch(err => console.log(err));
 
+
+            dispatch(boardCreated(newBoard))
         setBoardName("");
     }
 

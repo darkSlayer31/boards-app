@@ -8,9 +8,9 @@ import BoardRenameForm from '../boardRenameForm/BoardRenameForm';
 import './board.scss'
 
 const Board = () => {
-    const {activeBoard} = useSelector(state => state);
+    const {activeBoardId} = useSelector(state => state);
 
-    if (activeBoard === null) {
+    if (activeBoardId === null) {
         return <h5 className="active-board__title">Выберите доску</h5>;
     }
 
@@ -18,7 +18,7 @@ const Board = () => {
         <>
             <BoardRenameForm/>
             <div className="columns">
-                <ColumnsList boardId= {activeBoard.id}/>
+                <ColumnsList boardId= {activeBoardId}/>
                 <ColumnAddForm/>
             </div>
         </>

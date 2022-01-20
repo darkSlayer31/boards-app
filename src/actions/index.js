@@ -19,6 +19,13 @@ export const setModalActive = (modalActive, activeTask) => {
     }
 }
 
+export const usersFetched = (users) => {
+    return {
+        type: 'USERS_FETCHED',
+        payload: users ? users : []
+    }
+}
+
 export const boardsFetching = () => {
     return {
         type: 'BOADRS_FETCHING'
@@ -155,5 +162,19 @@ export const commentCreated = (newComment) => {
     return {
         type: 'COMMENT_CREATED',
         payload: newComment
+    }
+}
+
+export const commentDeleted = (id) => {
+    return {
+        type: 'COMMENT_DELETED',
+        payload: id
+    }
+}
+
+export const commentChanged = (id, text) => {
+    return {
+        type: 'COMMENT_CHANGED',
+        payload: {id, text}
     }
 }

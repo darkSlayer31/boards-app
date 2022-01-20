@@ -3,25 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
 import TaskList from '../taskList/TaskList';
 import TaskAddForm from '../taskAddForm/TaskAddForm';
-import { columnDeleted, taskDeleted } from '../../actions';
+import { columnDeleted} from '../../actions';
 
 import './columnsItem.scss';
 
 const ColumnsItem = (props) => {
 
+    const {tasks} = useSelector(state => state)
     const dispatch = useDispatch();
     const {request} = useHttp();
 
-    const tasks = useSelector(state => state.tasks)
 
-    const onDelete = (id) => {
-        const deletedTasks = tasks.filter(item => item.parent === id)
-        request(`http://localhost:3001/columns/${id}`, 'DELETE')
-            .then(data => console.log(data))
-            .then(dispatch(columnDeleted(id)))
-            .catch(err => console.log(err))
-        // dispatch(columnDeleted(id));
-        // dispatch(taskDeleted(deletedTasks));
+    const onDelete = async (id) => {
+        try {
+            const deletedTasks = tasks.filter(item => item.parent === id);
+            const promises = deletedTasks.map(async (item) => await request(`http://localhost:3001/tasks/${item.id}`, 'DELETE'));
+
+            await Promise.all(promises);
+            await request(`http://localhost:3001/columns/${id}`, 'DELETE');
+
+            dispatch(columnDeleted(id));
+        } catch (err) {
+            console.log(err)
+        }
+
+        // console.log('tasks deleted')
+        //     .then(data => console.log(data, "column deleted"))
+        //     .then(dispatch(columnDeleted(id)))
+        //     .then(Promise.all(promises)
+        //         .then(console.log('tasks deleted')))
+        //     .catch(err => console.log(err))
+        //dispatch(columnDeleted(id));
     }
 
     return (

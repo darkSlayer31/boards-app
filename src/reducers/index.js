@@ -4,21 +4,20 @@ const initialState = {
     columns: [],
     tasks: [],
     comments: [],
-    activeBoard: null,
+    activeBoardId: null,
     boardsLoadingStatus: 'idle',
     modalActive: false,
     activeTask: null,
     activeUser: null
 }
 
-function inArray(arr) {
-    return function(x) {
-      return !arr.includes(x);
-    };
-  }
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'USERS_FETCHED':
+            return {
+                ...state,
+                users: action.payload
+            }
         case 'USER_ADDED':
             return {
                 ...state,
@@ -27,7 +26,7 @@ const reducer = (state = initialState, action) => {
         case 'ACTIVE_USER_CHANGED':
             return {
                 ...state,
-                activeUser: action.payload.name
+                activeUser: action.payload
             }
         case 'SET_MODAL_ACTIVE':
             return {
@@ -51,7 +50,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 boardsLoadingStatus: 'error'
             }
-            case 'COLUMNS_FETCHING':
+        case 'COLUMNS_FETCHING':
             return {
                 ...state,
                 boardsLoadingStatus: 'loading'
@@ -107,7 +106,10 @@ const reducer = (state = initialState, action) => {
         case 'BOARD_DELETED':
             return {
                 ...state,
-                boards: state.boards.filter(item => item.id !== action.payload)
+                boards: state.boards.filter(item => item.id !== action.payload),
+                columns: state.columns.filter(item => item.parent !== action.payload),
+                tasks: state.tasks.filter(item => item.boardParent !== action.payload),
+                comments: state.comments.filter(item => item.boardParent !== action.payload)
             }
         case 'BOARD_UPDATED':
             return {
@@ -117,16 +119,12 @@ const reducer = (state = initialState, action) => {
                         return {...item, name: action.payload.newName}
                     }
                     return item
-                }),
-                activeBoard: {
-                    ...state.activeBoard,
-                    name: action.payload.newName
-                }
+                })
             }
         case 'ACTIVE_BOARD_CHANGED':
             return {
                 ...state,
-                activeBoard: state.boards.find(item => item.id === action.payload)
+                activeBoardId: action.payload
             }
         case 'COLUMN_CREATED':
             return {
@@ -136,7 +134,9 @@ const reducer = (state = initialState, action) => {
         case 'COLUMN_DELETED':
             return {
                 ...state,
-                columns: state.columns.filter(item => item.id !== action.payload)
+                columns: state.columns.filter(item => item.id !== action.payload),
+                tasks: state.tasks.filter(item => item.parent !== action.payload),
+                comments: state.comments.filter(item => item.columnParent !== action.payload)
             }
         case 'TASK_CREATED':
             return {
@@ -146,8 +146,8 @@ const reducer = (state = initialState, action) => {
         case 'TASK_DELETED':
             return {
                 ...state,
-                tasks: state.tasks.filter(item => item.id !== action.payload)
-                //tasks: state.tasks.filter(inArray(action.payload))
+                tasks: state.tasks.filter(item => item.id !== action.payload),
+                comments: state.comments.filter(item => item.parent !== action.payload)
             }
 
         case 'COMMENT_CREATED':
@@ -155,6 +155,24 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 comments: [...state.comments, action.payload]
             }
+
+        case 'COMMENT_DELETED':
+            return {
+                ...state,
+                comments: state.comments.filter(item => item.id !== action.payload)
+            }
+        case 'COMMENT_CHANGED':
+            return {
+                ...state,
+                comments: state.comments.map(item => {
+                    if (item.id === action.payload.id) {
+                        return {...item, text: action.payload.text }
+                    }
+
+                    return item
+                })
+            }
+
         default: return state
     }
 }
