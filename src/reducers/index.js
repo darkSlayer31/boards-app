@@ -28,6 +28,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 activeUser: action.payload
             }
+        case 'ACTIVE_TASK_CHANGED':
+            return {
+                ...state,
+                activeTask: action.payload
+            }
         case 'SET_MODAL_ACTIVE':
             return {
                 ...state,
@@ -116,7 +121,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 boards: state.boards.map(item => {
                     if (item.id === action.payload.id) {
-                        return {...item, name: action.payload.newName}
+                        return {...action.payload.newBoard}
                     }
                     return item
                 })
@@ -149,7 +154,18 @@ const reducer = (state = initialState, action) => {
                 tasks: state.tasks.filter(item => item.id !== action.payload),
                 comments: state.comments.filter(item => item.parent !== action.payload)
             }
-
+        case 'TASK_UPDATED':
+            return {
+                ...state,
+                tasks: state.tasks.map(item => {
+                    if (item.id === action.payload.id) {
+                        return {
+                            ...action.payload.newTask
+                        }
+                    }
+                    return item
+                })
+            }
         case 'COMMENT_CREATED':
             return {
                 ...state,

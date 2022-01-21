@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useHttp } from "../../hooks/http.hook";
 
-import AppHeader from "../appHeader";
-import Sidebar from "../Sidebar/Sidebar";
-import Board from "../board/Board";
-import Modal from "../modal/Modal";
-import TaskModal from "../taskModal/TaskModal";
-import Authorization from "../authorization/Authorization";
+import AppHeader from "../AppHeader";
+import Sidebar from "../Sidebar";
+import Board from "../Board";
+import Modal from "../Modal";
+import TaskModal from "../TaskModal";
+import Authorization from "../Authorization";
 import {boardsFetched, boardsFetching, boardsFetchingError, tasksFetched,
     tasksFetchingError, columnsFetched, columnsFetchingError, commentsFetched, commentsFetchingError, usersFetched } from '../../actions';
 

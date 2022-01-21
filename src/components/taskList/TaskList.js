@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { taskDeleted, setModalActive } from '../../actions';
+import { taskDeleted, setModalActive, taskUpdated } from '../../actions';
 import { useHttp } from '../../hooks/http.hook';
 
 import './taskList.scss';
@@ -9,7 +9,7 @@ import removeIcon from './delete-icon.svg';
 
 const TaskList = ({columnId, columnName}) => {
 
-    const {tasks} = useSelector(state => state);
+    const {tasks, columns, activeBoardId} = useSelector(state => state);
 
     const dispatch = useDispatch();
     const {request} = useHttp()
@@ -22,6 +22,23 @@ const TaskList = ({columnId, columnName}) => {
             .then(dispatch(taskDeleted(id)))
             .catch(err => console.log(err))
         //dispatch(taskDeleted(id))
+    }
+
+    const changeColumnParent = (id) => {
+        const task = filteredTasks.find(item => item.id === id);
+        const filteredColumns = columns.filter(item => item.parent === activeBoardId);
+        const columnIndex = filteredColumns.findIndex(item => item.id === task.parent)
+
+        if (filteredColumns.length <= columnIndex + 1) {
+            alert('Больше колонок нет')
+        } else {
+            const newTask = {
+                    ...task,
+                    parent: filteredColumns[columnIndex + 1].id
+                }
+            console.log(newTask)
+            dispatch(taskUpdated(id, newTask));
+        }
     }
 
     const renderTaskList = (arr) => {
@@ -48,7 +65,8 @@ const TaskList = ({columnId, columnName}) => {
                             onClick={() => onDelete(id)} >
                             <img src={removeIcon} alt="" className="task__icon"></img>
                         </button>
-                        <button className="btn--task">
+                        <button className="btn--task"
+                            onClick={() => changeColumnParent(id)} >
                             <img src={nextIcon} alt="" className="task__icon"></img>
                         </button>
                     </div>

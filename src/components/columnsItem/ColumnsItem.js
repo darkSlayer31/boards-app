@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useHttp } from '../../hooks/http.hook';
-import TaskList from '../taskList/TaskList';
-import TaskAddForm from '../taskAddForm/TaskAddForm';
+import TaskList from '../TaskList/TaskList';
+import TaskAddForm from '../TaskAddForm/TaskAddForm';
 import { columnDeleted} from '../../actions';
 
 import './columnsItem.scss';

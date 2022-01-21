@@ -1,8 +1,8 @@
 import { useSelector} from 'react-redux';
 
-import ColumnAddForm from '../columnAddForm/ColumnAddForm';
-import ColumnsList from '../columnsList/ColumnsList';
-import BoardRenameForm from '../boardRenameForm/BoardRenameForm';
+import ColumnAddForm from '../ColumnAddForm';
+import ColumnsList from '../ColumnsList';
+import BoardRenameForm from '../BoardRenameForm';
 
 
 import './board.scss'

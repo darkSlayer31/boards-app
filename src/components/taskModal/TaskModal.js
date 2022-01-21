@@ -1,11 +1,32 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useHttp } from "../../hooks/http.hook";
 
-import CommentsList from "../commentsList/CommentsList";
-import CommentsAddForm from "../commentsAddForm/CommentsAddForm";
+import CommentsList from "../CommentsList";
+import CommentsAddForm from "../CommentsAddForm";
+import { taskUpdated, activeTaskChanged } from "../../actions";
 
 const TaskModal = () => {
-    const {activeTask, activeBoardId, boards} = useSelector(state => state);
+    const {activeTask, activeBoardId, boards, activeUser} = useSelector(state => state);
     const activeBoard = boards.find(item => item.id === activeBoardId);
+    const [descr, setDescr] = useState(activeTask.descr);
+    const [editDescr, setEditDescr] = useState(false);
+
+    const dispatch = useDispatch();
+    const {request} = useHttp();
+
+    const onChangeDescr = (id) => {
+        const newTask = {
+            ...activeTask,
+            descr
+        }
+
+        request(`http://localhost:3001/tasks/${id}`, "PUT", JSON.stringify(newTask))
+            .then(dispatch(taskUpdated(id, newTask)))
+            .then(dispatch(activeTaskChanged(newTask)))
+            .catch(err => console.log(err))
+        setEditDescr(false)
+    }
 
     return (
         <>
@@ -17,12 +38,32 @@ const TaskModal = () => {
                 </div>
             </div>
             <div className="task__descr">
-                <h4 className="task__subtitle">Описание</h4>
-                <div className="task__descr-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                <h3 className="task__subtitle">Описание</h3>
+
+                {((activeTask.descr !== '') && !editDescr) && (
+                    <>
+                        <p className="task__descr-text">{activeTask.descr}</p>
+                        {activeUser.username === activeTask.author && (
+                            <button className="comments__reply" type="button" onClick={() => setEditDescr(true)}>изменить</button>
+                        )}
+                    </>
+                )}
+
+                {((activeTask.descr === '') || editDescr) && (
+                    <>
+                        <textarea
+                            className="form__control form__control--textarea"
+                            name="commentText"
+                            placeholder="Опишите вашу задачу"
+                            value={descr}
+                            onChange={(e) => setDescr(e.target.value)}
+                            ></textarea>
+                        <button className="btn" type="submit" onClick={() => onChangeDescr(activeTask.id)}>{editDescr ? 'Изменить' : 'Добавить'}</button>
+                    </>
+                )}
             </div>
 
             <h3 className="task__subtitle">Комментарии:</h3>
-
             <CommentsAddForm taskId={activeTask.id} taskParent={activeTask.parent}/>
             <CommentsList taskId={activeTask.id}/>
         </>

@@ -116,10 +116,10 @@ export const boardDeleted = (boardId) => {
     }
 }
 
-export const boardUpdated = (id, newName) => {
+export const boardUpdated = (id, newBoard) => {
     return {
         type: 'BOARD_UPDATED',
-        payload: {id, newName}
+        payload: {id, newBoard}
     }
 }
 
@@ -127,6 +127,13 @@ export const activeBoardChanged = (boardId) => {
     return {
         type: 'ACTIVE_BOARD_CHANGED',
         payload: boardId
+    }
+}
+
+export const activeTaskChanged = (newTask) => {
+    return {
+        type: 'ACTIVE_TASK_CHANGED',
+        payload: newTask
     }
 }
 
@@ -155,6 +162,13 @@ export const taskDeleted = (taskId) => {
     return {
         type: 'TASK_DELETED',
         payload: taskId
+    }
+}
+
+export const taskUpdated = (id, newTask) => {
+    return {
+        type: 'TASK_UPDATED',
+        payload: {id, newTask}
     }
 }
 

@@ -66,11 +66,6 @@
       "parent": "e75fb57e-8a7d-4f53-a410-5520ec127415"
     },
     {
-      "id": "5e9f89ee-f9d8-4415-a51f-1ec608159605",
-      "name": "134",
-      "parent": "c61cf027-099f-43d7-b98b-447b9b8b474f"
-    },
-    {
       "id": "3e44206e-62d5-4322-b13c-4bd4ee714334",
       "name": "1",
       "parent": "af2e189a-3885-4bb4-af19-3d4e91cb4c25"
@@ -146,20 +141,6 @@
       "parent": "3234f2ee-82f8-4075-819c-6fe3e8796b3a"
     },
     {
-      "id": "3520a1ec-3869-473e-9934-a338501dfd6d",
-      "name": "2123",
-      "author": "author",
-      "descr": "",
-      "parent": "5e9f89ee-f9d8-4415-a51f-1ec608159605"
-    },
-    {
-      "id": "7fd98ac1-650a-4a37-b183-19c562330b4e",
-      "name": "222",
-      "author": "author",
-      "descr": "",
-      "parent": "5e9f89ee-f9d8-4415-a51f-1ec608159605"
-    },
-    {
       "id": "02d4fdcb-dd71-4f6c-8915-f390acd66aac",
       "name": "task 222",
       "author": "author",
@@ -211,9 +192,10 @@
       "id": "b091f90c-ef29-4064-92b9-9eee4b178a13",
       "name": "task 2",
       "author": "ivan",
-      "descr": "",
+      "descr": "xdsds d",
       "parent": 11,
-      "boardParent": 1
+      "boardParent": 1,
+      "columnName": "column 1"
     },
     {
       "id": "674c033d-8c4e-4546-a547-b241ff860300",
@@ -222,6 +204,23 @@
       "descr": "",
       "parent": "37ac66a4-3f74-4a11-a3e5-c7ba60f059d4",
       "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
+    },
+    {
+      "id": "a1fe1694-047f-44d0-ac4e-013c9597000f",
+      "name": "task 4",
+      "author": "ivan",
+      "descr": "",
+      "parent": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2",
+      "boardParent": "c61cf027-099f-43d7-b98b-447b9b8b474f"
+    },
+    {
+      "id": "396e6176-c715-43df-beb4-452eb40c30cb",
+      "name": "task 3",
+      "author": "ivan",
+      "descr": " qweerwrer ",
+      "parent": 11,
+      "boardParent": 1,
+      "columnName": "column 1"
     }
   ],
   "comments": [
@@ -253,7 +252,7 @@
     },
     {
       "id": "6305c1fc-f254-411d-a269-64811e64b090",
-      "text": "comment 3443434",
+      "text": "comment 345454dsf dsf  dsds ",
       "author": "ivan",
       "parent": 111,
       "columnParent": 11,
@@ -261,9 +260,17 @@
     },
     {
       "id": "7109aec6-ed22-4c1a-8e08-9686f178b705",
-      "text": "comment 3443434",
+      "text": "ewewf",
       "author": "ivan",
       "parent": 111,
+      "columnParent": 11,
+      "boardParent": 1
+    },
+    {
+      "id": "599f114e-ddd3-42d1-8dba-2102b899fbf5",
+      "text": "comment 1",
+      "author": "ivan",
+      "parent": "396e6176-c715-43df-beb4-452eb40c30cb",
       "columnParent": 11,
       "boardParent": 1
     }

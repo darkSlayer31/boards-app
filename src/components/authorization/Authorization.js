@@ -1,5 +1,5 @@
-import Register from "../register/Register";
-import Login from "../login/Login";
+import Register from "../Register";
+import Login from "../Login";
 
 import './authorization.scss'
 

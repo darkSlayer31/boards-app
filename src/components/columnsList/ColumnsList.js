@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import ColumnsItem from "../columnsItem/ColumnsItem"
+import ColumnsItem from "../ColumnsItem"
 
 const ColumnsList = ({boardId}) => {
 

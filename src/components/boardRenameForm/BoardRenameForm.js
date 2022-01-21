@@ -26,7 +26,7 @@ const BoardRenameForm = () => {
 
         request(`http://localhost:3001/boards/${activeBoard.id}`, "PUT", JSON.stringify(newBoard))
             .then(res => console.log(res, "Отправка успешна"))
-            .then(dispatch(boardUpdated(activeBoard.id, activeBoardName)))
+            .then(dispatch(boardUpdated(activeBoard.id, newBoard)))
             .catch(err => console.log(err));
     }
 

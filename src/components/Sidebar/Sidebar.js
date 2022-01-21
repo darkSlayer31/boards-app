@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {useHttp} from '../../hooks/http.hook';
 import {boardDeleted, activeBoardChanged} from '../../actions';
-import BoardAddForm from '../boardAddForm/BoardAddForm';
-import Spinner from '../spinner/Spinner';
+import BoardAddForm from '../BoardAddForm';
+import Spinner from '../Spinner';
 
 
 import './sidebar.scss';
