@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { boardUpdated } from '../../actions';
+import { successNotify, errorNotify } from '../Toaster';
 
 const BoardRenameForm = () => {
 
@@ -25,9 +26,9 @@ const BoardRenameForm = () => {
         }
 
         request(`http://localhost:3001/boards/${activeBoard.id}`, "PUT", JSON.stringify(newBoard))
-            .then(res => console.log(res, "Отправка успешна"))
-            .then(dispatch(boardUpdated(activeBoard.id, newBoard)))
-            .catch(err => console.log(err));
+            .then(() => dispatch(boardUpdated(activeBoard.id, newBoard)))
+            .then(() => successNotify('Доска изменена'))
+            .catch(() => errorNotify());
     }
 
     return (

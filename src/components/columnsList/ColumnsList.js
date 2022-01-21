@@ -5,7 +5,6 @@ import ColumnsItem from "../ColumnsItem"
 const ColumnsList = ({boardId}) => {
 
     const {columns} = useSelector(state => state)
-
     const filteredColumns = columns.filter(item => item.parent === boardId);
 
     const renderColumnsList = (arr) => {

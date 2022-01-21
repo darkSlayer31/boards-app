@@ -3,7 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
 
+
 import { boardCreated } from "../../actions";
+import { errorNotify, successNotify } from "../Toaster";
 
 
 const BoardAddForm = () => {
@@ -19,13 +21,11 @@ const BoardAddForm = () => {
             name: boardName
         }
 
-        // request("http://localhost:3001/boards", "POST", JSON.stringify(newBoard))
-        //     .then(res => console.log(res, "Отправка успешна"))
-        //     .then(dispatch(boardCreated(newBoard)))
-        //     .catch(err => console.log(err));
+        request("http://localhost:3001/boards", "POST", JSON.stringify(newBoard))
+            .then(() => dispatch(boardCreated(newBoard)))
+            .then(() => successNotify('Доска создана'))
+            .catch(() => errorNotify());
 
-
-            dispatch(boardCreated(newBoard))
         setBoardName("");
     }
 

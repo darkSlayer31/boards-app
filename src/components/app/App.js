@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useHttp } from "../../hooks/http.hook";
+import { ToastContainer } from 'react-toastify';
+
 
 import AppHeader from "../AppHeader";
 import Sidebar from "../Sidebar";
@@ -41,6 +43,7 @@ const App = () => {
 
     return (
         <>
+            <ToastContainer hideProgressBar={true} position="top-center" theme="dark"/>
             {activeUser ?
             <>
                 <AppHeader/>

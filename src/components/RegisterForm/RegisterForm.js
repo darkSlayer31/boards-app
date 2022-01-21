@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import validator from "validator"
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { userAdded } from "../../actions";
 import { useHttp } from "../../hooks/http.hook";
+import { validateUser } from "./utils";
+import { errorNotify, successNotify } from "../Toaster";
 
 import './register.scss';
 
@@ -12,20 +16,19 @@ const Register = () => {
 
     const {request} = useHttp();
     const dispatch = useDispatch();
+    const {users} = useSelector(state => state)
 
-    const [register, setRegister] = useState(() => {
+    const [userData, setUserData] = useState(() => {
         return {
             username: "",
             email: "",
             password: "",
             password2: "",
-
         }
     })
 
-    const changeInputRegister = (e) => {
-        e.preventDefault();
-        setRegister(prev => {
+    const onChangeHandler = (e) => {
+        setUserData(prev => {
             return {
                 ...prev,
                 [e.target.name]: e.target.value
@@ -33,40 +36,35 @@ const Register = () => {
         })
     }
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
         const user = {
-            ...register,
+            ...userData,
             id: uuidv4()
         }
-        if (validator.isEmpty(user.username)) {
-            alert("Вы не ввели имя пользователя")
-        } else if (!validator.isEmail(user.email)) {
-            alert("Вы не ввели email")
-        } else if (user.password !== user.password2) {
-            alert("Пароли не совпадают")
-        } else if (!validator.isStrongPassword(user.password, {minSymbols: 0})) {
-            alert("Минимальная длина пароля 8 символов. Пароль должен включать в себя как минимум одну заглавную букву и одну цифру")
-        } else {
-            //ДОЛЖНА БЫТЬ ПРОВЕРКА ЕСТЬ ЛИ УЖЕ ТАКОЙ ПОЛЬЗОВАТЕЛЬ
-            console.log(user, "успешно")
-            request("http://localhost:3001/users", "POST", JSON.stringify(user))
-                .then(res => console.log(res, "Отправка успешна"))
-                .then(dispatch(userAdded(user)))
-                .then(alert('Вы зарегистрированы'))
-                .catch(err => console.log(err))
 
-            setRegister({
-                username: "",
-                email: "",
-                password: "",
-                password2: "",
-            })
+        const sameUser = users.find(item => item.username === user.username || item.email === user.email)
+
+        if (sameUser) {
+            errorNotify('Такой пользователь уже существует')
+        } else if (validateUser(user)) {
+            await request("http://localhost:3001/users", "POST", JSON.stringify(user))
+                .then(() => dispatch(userAdded(user)))
+                .then(() => successNotify('Вы успешно зарегистрированы'))
+                .catch(() => errorNotify('Что-то пошло не так'))
         }
+
+        setUserData({
+            username: "",
+            email: "",
+            password: "",
+            password2: "",
+        })
     }
 
     return (
         <div className="form">
+            <ToastContainer hideProgressBar={true} position="top-center" theme="dark"/>
             <h2 className="form__title">Регистрация пользователя:</h2>
             <form onSubmit={onSubmitHandler}>
                 <div className="form__group">
@@ -74,8 +72,8 @@ const Register = () => {
                         type="username"
                         id="username"
                         name="username"
-                        value={register.username}
-                        onChange={changeInputRegister}
+                        value={userData.username}
+                        onChange={onChangeHandler}
                         /></p>
                 </div>
                 <div className="form__group">
@@ -83,8 +81,8 @@ const Register = () => {
                         type="email"
                         id="email"
                         name="email"
-                        value={register.email}
-                        onChange={changeInputRegister}
+                        value={userData.email}
+                        onChange={onChangeHandler}
                         formNoValidate
                         /></p>
                 </div>
@@ -93,8 +91,8 @@ const Register = () => {
                         type="password"
                         id="password"
                         name="password"
-                        value={register.password}
-                        onChange={changeInputRegister}
+                        value={userData.password}
+                        onChange={onChangeHandler}
                         /></p>
                 </div>
                 <div className="form__group">
@@ -102,8 +100,8 @@ const Register = () => {
                     type="password"
                     id="password2"
                     name="password2"
-                    value={register.password2}
-                    onChange={changeInputRegister}
+                    value={userData.password2}
+                    onChange={onChangeHandler}
                         /></p>
                 </div>
                 <button className="btn" type="submit">Регистрация</button>

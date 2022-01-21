@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
 
 import { commentDeleted, commentChanged } from "../../actions";
+import { successNotify, errorNotify } from '../Toaster';
 
 const CommentsItem = ({comment, editComment, setEditComment}) => {
 
@@ -31,7 +32,8 @@ const CommentsItem = ({comment, editComment, setEditComment}) => {
 
         request(`http://localhost:3001/comments/${id}`, "PUT", JSON.stringify(newComment))
             .then(dispatch(commentChanged(id, text)))
-            .catch(err => console.log(err))
+            .then(() => successNotify('Успешно'))
+            .catch(() => errorNotify())
 
         setEditComment({show: false, id: null})
     }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useHttp } from "../../hooks/http.hook";
 import { columnCreated } from "../../actions";
+import { successNotify, errorNotify } from "../Toaster";
 
 
 const ColumnAddForm = () => {
@@ -22,15 +23,12 @@ const ColumnAddForm = () => {
         }
 
         request(`http://localhost:3001/columns`, "POST", JSON.stringify(newColumn))
-            .then(res => console.log(res, "Отправка успешна"))
             .then(dispatch(columnCreated(newColumn)))
-            .catch(err => console.log(err));
-
-        //dispatch(columnCreated(newColumn))
+            .then(() => successNotify('Колонка добавлена'))
+            .catch(() => errorNotify());
 
         setColumnName("");
     }
-
 
     return (
         <div className="columns__item">

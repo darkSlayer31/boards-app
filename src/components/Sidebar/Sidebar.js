@@ -7,23 +7,20 @@ import Spinner from '../Spinner';
 
 
 import './sidebar.scss';
+import { errorNotify } from '../Toaster';
 
 const Sidebar = () => {
 
     const {boards, boardsLoadingStatus, columns} = useSelector(state => state);
-
     const {request} = useHttp();
     const dispatch = useDispatch();
 
     const onDelete = (id) => {
         const deletedColumns = columns.filter(item => item.parent === id)
-        // request(`http://localhost:3001/boards/${id}`, 'DELETE')
-        //     .then(data => console.log(data, "Deleted"))
-        //     .then(dispatch(boardDeleted(id)))
-        //     .catch(err => console.log(err))
-
-        dispatch(boardDeleted(id))
-        dispatch(activeBoardChanged(null))
+        request(`http://localhost:3001/boards/${id}`, 'DELETE')
+            .then(() => dispatch(boardDeleted(id)))
+            .then(() => dispatch(activeBoardChanged(null)))
+            .catch(errorNotify())
     }
 
     if (boardsLoadingStatus === "loading") {
@@ -56,8 +53,6 @@ const Sidebar = () => {
     }
 
     const elements = renderBoardsList(boards);
-
-
 
     return (
         <aside className="sidebar">

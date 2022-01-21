@@ -1,4 +1,4 @@
-import Register from "../Register";
+import RegisterForm from "../RegisterForm";
 import Login from "../Login";
 
 import './authorization.scss'
@@ -6,7 +6,7 @@ import './authorization.scss'
 const Authorization = () => {
     return (
         <div className="authorization">
-            <Register/>
+            <RegisterForm/>
             <Login/>
         </div>
     )

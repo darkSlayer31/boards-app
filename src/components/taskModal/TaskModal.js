@@ -5,6 +5,7 @@ import { useHttp } from "../../hooks/http.hook";
 import CommentsList from "../CommentsList";
 import CommentsAddForm from "../CommentsAddForm";
 import { taskUpdated, activeTaskChanged } from "../../actions";
+import { errorNotify } from "../Toaster";
 
 const TaskModal = () => {
     const {activeTask, activeBoardId, boards, activeUser} = useSelector(state => state);
@@ -22,9 +23,9 @@ const TaskModal = () => {
         }
 
         request(`http://localhost:3001/tasks/${id}`, "PUT", JSON.stringify(newTask))
-            .then(dispatch(taskUpdated(id, newTask)))
-            .then(dispatch(activeTaskChanged(newTask)))
-            .catch(err => console.log(err))
+            .then(() => dispatch(taskUpdated(id, newTask)))
+            .then(() => dispatch(activeTaskChanged(newTask)))
+            .catch(() => errorNotify())
         setEditDescr(false)
     }
 

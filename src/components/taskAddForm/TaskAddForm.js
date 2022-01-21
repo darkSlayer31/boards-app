@@ -4,6 +4,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
 
 import { taskCreated } from "../../actions";
+import { errorNotify, successNotify } from "../Toaster";
 
 
 const TaskAddForm = ({columnId}) => {
@@ -25,14 +26,12 @@ const TaskAddForm = ({columnId}) => {
         }
 
         request(`http://localhost:3001/tasks`, 'POST', JSON.stringify(newTask))
-            .then(res => console.log(res, 'Отправка успешна'))
-            .then(dispatch(taskCreated(newTask)))
-            .catch(err => console.log(err));
-        //dispatch(taskCreated(newTask))
+            .then(() => dispatch(taskCreated(newTask)))
+            .then(() => successNotify('Задача добавлена'))
+            .catch(() => errorNotify());
 
         setTaskName("");
     }
-
 
     return (
         <form className="task__add-form" onSubmit={onSubmitHandler}>

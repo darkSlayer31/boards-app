@@ -36,8 +36,7 @@ const TaskList = ({columnId, columnName}) => {
                     ...task,
                     parent: filteredColumns[columnIndex + 1].id
                 }
-            console.log(newTask)
-            dispatch(taskUpdated(id, newTask));
+            dispatch(() => taskUpdated(id, newTask));
         }
     }
 

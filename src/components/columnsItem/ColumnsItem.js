@@ -13,7 +13,6 @@ const ColumnsItem = (props) => {
     const dispatch = useDispatch();
     const {request} = useHttp();
 
-
     const onDelete = async (id) => {
         try {
             const deletedTasks = tasks.filter(item => item.parent === id);

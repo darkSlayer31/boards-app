@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { activeUserChanged } from "../../actions";
+import { errorNotify } from "../Toaster";
 
 
 const Login = () => {
 
     const dispatch = useDispatch();
     const {users} = useSelector(state => state)
-    const [loginUser, setLoginUser] = useState(() => {
+    const [userData, setUserData] = useState(() => {
         return {
             username: '',
             password: ''
@@ -15,8 +16,7 @@ const Login = () => {
     })
 
     const changeInputRegister = (e) => {
-        e.preventDefault();
-        setLoginUser(prev => {
+        setUserData(prev => {
             return {
                 ...prev,
                 [e.target.name]: e.target.value
@@ -26,12 +26,10 @@ const Login = () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        const user = users.find(item => item.username === loginUser.username);
-        console.log(user)
-        if (loginUser.password !== user.password) {
-            alert("Неверный пароль")
+        const user = users.find(item => item.username === userData.username);
+        if (userData.password !== user.password) {
+            errorNotify('Неверный пароль')
         } else {
-            console.log('вход успешен')
             dispatch(activeUserChanged(user))
         }
     }
@@ -45,7 +43,7 @@ const Login = () => {
                         type="username"
                         id="login-username"
                         name="username"
-                        value={loginUser.username}
+                        value={userData.username}
                         onChange={changeInputRegister}
                         /></p>
                 </div>
@@ -54,7 +52,7 @@ const Login = () => {
                         type="password"
                         id="login-password"
                         name="password"
-                        value={loginUser.password}
+                        value={userData.password}
                         onChange={changeInputRegister}
                         /></p>
                 </div>

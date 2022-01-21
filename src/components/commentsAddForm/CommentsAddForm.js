@@ -6,6 +6,7 @@ import { useHttp } from "../../hooks/http.hook";
 import { commentCreated } from "../../actions";
 
 import './commentsAddForm.scss'
+import { errorNotify, successNotify } from "../Toaster";
 
 const CommentsAddForm = ({taskId, taskParent}) => {
 
@@ -27,15 +28,12 @@ const CommentsAddForm = ({taskId, taskParent}) => {
         }
 
         request(`http://localhost:3001/comments`, 'POST', JSON.stringify(newComment))
-            .then(res => console.log(res, 'Отправка успешна'))
             .then(dispatch(commentCreated(newComment)))
-            .catch(err => console.log(err));
-        //dispatch(commentCreated(newComment));
+            .then(() => successNotify('Комментарий добавлен'))
+            .catch(() => errorNotify());
 
         setCommentText("");
     }
-
-
 
     return (
         <form className="form form--comment" action="/" method="post" onSubmit={onSubmitHandler}>
