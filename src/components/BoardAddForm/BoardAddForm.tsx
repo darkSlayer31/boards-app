@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 
 
 import { useHttp } from "../../hooks/useHttp";
-import { Board } from '../../types/types';
 import { boardCreated } from "../../actions";
 import { errorNotify, successNotify } from "../Toaster";
 
@@ -17,7 +16,7 @@ const BoardAddForm = () => {
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newBoard: Board = {
+        const newBoard = {
             id: uuidv4(),
             name: boardName
         }

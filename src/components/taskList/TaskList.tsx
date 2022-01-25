@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch, useHttp } from '../../hooks';
 import { taskDeleted, setModalActive, taskUpdated } from '../../actions';
-import { errorNotify } from '../Toaster';
+import { errorNotify, warningNotify } from '../Toaster';
 import { Task } from '../../types/types'
 
 import './taskList.scss';
@@ -33,7 +33,7 @@ const TaskList = ({ columnId, columnName }: TaskListProps) => {
         const columnIndex = filteredColumns.findIndex(item => item.id === task?.parent)
 
         if (filteredColumns.length <= columnIndex + 1) {
-            alert('Больше колонок нет')
+            warningNotify('Больше колонок нет')
         } else if (task) {
             const newTask: Task = {
                 ...task,
@@ -43,45 +43,39 @@ const TaskList = ({ columnId, columnName }: TaskListProps) => {
         }
     }
 
-    const renderTaskList = (arr: Task[]) => {
-        if (arr.length === 0) {
-            return (
-                <ul className="task__list">
-                    <li className="task__item task__item--empty">
-                        <div className="task__link">
-                            <h5 className="task__title">Задач нет</h5>
-                        </div>
-                    </li>
-                </ul>
-            )
-        }
-
-        return arr.map(({ id, ...props }) => {
-            return (
-                <li className="task__item" key={id}>
-                    <div className="task__link" onClick={() => dispatch(setModalActive(true, { id, ...props, columnName }))}>
-                        <h5 className="task__title">{props.name}</h5>
-                    </div>
-                    <div className="task__btns">
-                        <button className="btn--task"
-                            onClick={() => onDelete(id)} >
-                            <img src={removeIcon} alt="" className="task__icon"></img>
-                        </button>
-                        <button className="btn--task"
-                            onClick={() => changeColumnParent(id)} >
-                            <img src={nextIcon} alt="" className="task__icon"></img>
-                        </button>
-                    </div>
-                </li>
-            )
-        })
-    }
-
-    const elements = renderTaskList(filteredTasks);
-
     return (
         <ul className="task__list">
-            {elements}
+            {
+                filteredTasks.length === 0 ? (
+                    <ul className="task__list">
+                        <li className="task__item task__item--empty">
+                            <div className="task__link">
+                                <h5 className="task__title">Задач нет</h5>
+                            </div>
+                        </li>
+                    </ul>
+                )
+                    :
+                    filteredTasks.map(({ id, ...props }) => {
+                        return (
+                            <li className="task__item" key={id}>
+                                <div className="task__link" onClick={() => dispatch(setModalActive(true, { id, ...props, columnName }))}>
+                                    <h5 className="task__title">{props.name}</h5>
+                                </div>
+                                <div className="task__btns">
+                                    <button className="btn--task"
+                                        onClick={() => onDelete(id)} >
+                                        <img src={removeIcon} alt="" className="task__icon"></img>
+                                    </button>
+                                    <button className="btn--task"
+                                        onClick={() => changeColumnParent(id)} >
+                                        <img src={nextIcon} alt="" className="task__icon"></img>
+                                    </button>
+                                </div>
+                            </li>
+                        )
+                    })
+            }
         </ul>
     )
 }

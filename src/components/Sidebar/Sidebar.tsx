@@ -24,37 +24,30 @@ const Sidebar = () => {
         return <h5>Ошибка загрузки</h5>
     }
 
-    const renderBoardsList = (arr: Board[]) => {
-        if (arr.length === 0) {
-            return (
-                <h5>Досок пока нет</h5>
-            )
-        }
-
-        return arr.map(board => {
-            return (
-                <li className="boards__list-item" key={board.id}>
-                    <div
-                        className="boards__link"
-                        onClick={() => dispatch(activeBoardChanged(board.id))} >
-                        <div className="boards__title">{board.name}</div>
-                    </div>
-                    <button
-                        className="btn"
-                        onClick={() => onDelete(board.id)} >Удалить</button>
-                </li>
-            )
-        })
-    }
-
-    const elements = renderBoardsList(boards);
-
     return (
         <aside className="sidebar">
             <div className="boards">
                 <div className="boards__header">Ваши доски</div>
                 <ul className="boards__list">
-                    {elements}
+                    {
+                        boards.length === 0 ? (<h5>Досок пока нет</h5>)
+                            :
+                            boards.map(board => {
+                                return (
+                                    <li className="boards__list-item" key={board.id}>
+                                        <div
+                                            className="boards__link"
+                                            onClick={() => dispatch(activeBoardChanged(board.id))} >
+                                            <div className="boards__title">{board.name}</div>
+                                        </div>
+                                        <button
+                                            className="btn"
+                                            onClick={() => onDelete(board.id)} >Удалить</button>
+                                    </li>
+                                )
+                            })
+
+                    }
                 </ul>
                 <BoardAddForm />
             </div>

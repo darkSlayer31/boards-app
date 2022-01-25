@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { useAppSelector, useAppDispatch, useHttp } from "../../hooks";
 import { columnCreated } from "../../actions";
 import { successNotify, errorNotify } from "../Toaster";
-import { Column } from "../../types/types";
 
 const ColumnAddForm = () => {
 
@@ -15,7 +14,7 @@ const ColumnAddForm = () => {
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newColumn: Column = {
+        const newColumn = {
             id: uuidv4(),
             name: columnName,
             parent: activeBoardId

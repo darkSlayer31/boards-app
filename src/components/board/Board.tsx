@@ -16,11 +16,19 @@ const Board = () => {
 
     return (
         <>
-            <BoardRenameForm />
-            <div className="columns">
-                <ColumnsList boardId={activeBoardId} />
-                <ColumnAddForm />
-            </div>
+            {
+                activeBoardId === '' ? (<h3 className="active-board__title">Выберите доску</h3>)
+                    :
+                    (
+                        <>
+                            <BoardRenameForm />
+                            <div className="columns">
+                                <ColumnsList boardId={activeBoardId} />
+                                <ColumnAddForm />
+                            </div>
+                        </>
+                    )
+            }
         </>
     )
 }
