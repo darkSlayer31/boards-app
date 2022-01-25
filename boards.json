@@ -209,9 +209,10 @@
       "id": "a1fe1694-047f-44d0-ac4e-013c9597000f",
       "name": "task 4",
       "author": "ivan",
-      "descr": "",
+      "descr": "111",
       "parent": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2",
-      "boardParent": "c61cf027-099f-43d7-b98b-447b9b8b474f"
+      "boardParent": "c61cf027-099f-43d7-b98b-447b9b8b474f",
+      "columnName": "column 3"
     },
     {
       "id": "396e6176-c715-43df-beb4-452eb40c30cb",
@@ -252,7 +253,7 @@
     },
     {
       "id": "6305c1fc-f254-411d-a269-64811e64b090",
-      "text": "comment 345454dsf dsf  dsds ",
+      "text": "111333333222",
       "author": "ivan",
       "parent": 111,
       "columnParent": 11,
@@ -260,7 +261,7 @@
     },
     {
       "id": "7109aec6-ed22-4c1a-8e08-9686f178b705",
-      "text": "ewewf",
+      "text": "ewewf 222",
       "author": "ivan",
       "parent": 111,
       "columnParent": 11,

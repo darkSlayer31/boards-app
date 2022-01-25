@@ -17,8 +17,13 @@
     left: 0;
     z-index: 1000;
 
+    &--loader {
+        z-index: 10000;
+    }
+
     &.show {
         display: flex;
+        background-color: rgba($black, .2);
     }
 }
 
@@ -31,6 +36,15 @@
 
     background-color: $white;
     border-radius: 5px;
+
+    &--loader {
+        width: 300px;
+
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+    }
 
     // transform: translateY(-50px);
     // transition: transform 200ms linear, opacity 200ms ease-in-out;
