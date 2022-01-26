@@ -1,5 +1,6 @@
-import { useAppDispatch, useAppSelector, useHttp } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useState } from "react";
+import axios from "axios";
 
 import CommentsList from "../CommentsList";
 import CommentsAddForm from "../CommentsAddForm";
@@ -8,73 +9,72 @@ import { errorNotify } from "../Toaster";
 import { Task } from '../../types/types'
 
 const TaskModal = () => {
-    const { activeTask, activeBoardId, boards, activeUser } = useAppSelector(state => state);
-    const activeBoard = boards.find(item => item.id === activeBoardId);
-    const [descr, setDescr] = useState(activeTask?.descr);
-    const [editDescr, setEditDescr] = useState(false);
+  const { activeTask, activeBoardId, boards, activeUser } = useAppSelector(state => state);
+  const activeBoard = boards.find(item => item.id === activeBoardId);
+  const [description, setDescription] = useState(activeTask?.description);
+  const [editDescription, setEditDescription] = useState(false);
 
-    const dispatch = useAppDispatch();
-    const { request } = useHttp();
+  const dispatch = useAppDispatch();
 
-    const onChangeDescr = (id: string) => {
-        if (descr && activeTask) {
-            const newTask: Task = {
-                ...activeTask,
-                descr
-            }
+  const onChangeDescr = (id: string) => {
+    if (description && activeTask) {
+      const newTask: Task = {
+        ...activeTask,
+        description
+      }
 
-            request(`http://localhost:3001/tasks/${id}`, "PUT", JSON.stringify(newTask))
-                .then(() => dispatch(taskUpdated(id, newTask)))
-                .then(() => dispatch(activeTaskChanged(newTask)))
-                .catch(() => errorNotify())
-            setEditDescr(false)
-        }
+      axios.put(`http://localhost:3001/tasks/${id}`, newTask)
+        .then(() => dispatch(taskUpdated(id, newTask)))
+        .then(() => dispatch(activeTaskChanged(newTask)))
+        .catch(() => errorNotify())
+      setEditDescription(false)
     }
+  }
 
-    return (
+  return (
+    <>
+      {(activeTask && activeBoard && activeUser) && (
         <>
-            {(activeTask && activeBoard && activeUser) && (
-                <>
-                    <div className="modal__header">
-                        <div className="task__name">{activeTask.name}</div>
-                        <div className="task__info">
-                            <div className="task__author">Автор задачи: {activeTask.author}</div>
-                            <div className="task__from">Находиться на доске {activeBoard.name} в колонке {activeTask.columnName}</div>
-                        </div>
-                    </div>
-                    <div className="task__descr">
-                        <h3 className="task__subtitle">Описание</h3>
+          <div className="modal__header">
+            <h2 className="task__name">{activeTask.name}</h2>
+            <div className="task__info">
+              <p className="task__author">Автор задачи: {activeTask.author}</p>
+              <p className="task__from">Находиться на доске {activeBoard.name} в колонке {activeTask.columnName}</p>
+            </div>
+          </div>
+          <div className="task__descr">
+            <h3 className="task__subtitle">Описание</h3>
 
-                        {((activeTask.descr !== '') && !editDescr) && (
-                            <>
-                                <p className="task__descr-text">{activeTask.descr}</p>
-                                {activeUser.username === activeTask.author && (
-                                    <button className="comments__change" type="button" onClick={() => setEditDescr(true)}>изменить</button>
-                                )}
-                            </>
-                        )}
-
-                        {((activeTask.descr === '') || editDescr) && (
-                            <>
-                                <textarea
-                                    className="form__control form__control--textarea"
-                                    name="commentText"
-                                    placeholder="Опишите вашу задачу"
-                                    value={descr}
-                                    onChange={(e) => setDescr(e.target.value)}
-                                ></textarea>
-                                <button className="btn" type="submit" onClick={() => onChangeDescr(activeTask.id)}>{editDescr ? 'Изменить' : 'Добавить'}</button>
-                            </>
-                        )}
-                    </div>
-
-                    <h3 className="task__subtitle">Комментарии:</h3>
-                    <CommentsAddForm taskId={activeTask.id} taskParent={activeTask.parent} />
-                    <CommentsList taskId={activeTask.id} />
-                </>
+            {((activeTask.description !== '') && !editDescription) && (
+              <>
+                <p className="task__descr-text">{activeTask.description}</p>
+                {activeUser.username === activeTask.author && (
+                  <button className="comments__change" type="button" onClick={() => setEditDescription(true)}>изменить</button>
+                )}
+              </>
             )}
+
+            {((activeTask.description === '') || editDescription) && (
+              <>
+                <textarea
+                  className="form__control form__control--textarea"
+                  name="commentText"
+                  placeholder="Опишите вашу задачу"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+                <button className="btn" type="submit" onClick={() => onChangeDescr(activeTask.id)}>{editDescription ? 'Изменить' : 'Добавить'}</button>
+              </>
+            )}
+          </div>
+
+          <h3 className="task__subtitle">Комментарии:</h3>
+          <CommentsAddForm taskId={activeTask.id} taskParent={activeTask.parent} />
+          <CommentsList taskId={activeTask.id} />
         </>
-    )
+      )}
+    </>
+  )
 }
 
 export default TaskModal;

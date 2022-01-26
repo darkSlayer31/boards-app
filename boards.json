@@ -78,130 +78,18 @@
   ],
   "tasks": [
     {
-      "id": 111,
-      "name": "task 1",
-      "author": "author name",
-      "descr": "descr",
-      "parent": 11
-    },
-    {
-      "id": 222,
-      "name": "task 2",
-      "author": "author name",
-      "descr": "descr",
-      "parent": 22
-    },
-    {
-      "id": 333,
-      "name": "task 3",
-      "author": "author name",
-      "descr": "descr",
-      "parent": 33
-    },
-    {
-      "id": "288e329c-58bb-49c7-ab0d-e85fe88f0df5",
-      "name": "123",
-      "author": "author",
-      "descr": "",
-      "parent": "37ac66a4-3f74-4a11-a3e5-c7ba60f059d4"
-    },
-    {
-      "id": "b3e33d64-c7e0-4c29-9309-98d35dab2e0b",
-      "name": "task 2",
-      "author": "author",
-      "descr": "",
-      "parent": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2"
-    },
-    {
-      "id": "82581cb8-18e9-4765-889c-0db6207b07ac",
-      "name": "task 3",
-      "author": "author",
-      "descr": "",
-      "parent": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2"
-    },
-    {
-      "id": "15c164df-a723-4b29-a92c-2f339cc4e155",
-      "name": "111",
-      "author": "author",
-      "descr": "",
-      "parent": "4077dabf-5348-4d1c-874a-f16a90a0edab"
-    },
-    {
-      "id": "4f290d3a-f6cc-4202-a7a7-9f6d13e77e01",
-      "name": "2222",
-      "author": "author",
-      "descr": "",
-      "parent": "4077dabf-5348-4d1c-874a-f16a90a0edab"
-    },
-    {
-      "id": "8d254c1f-4776-4e18-ae31-5a2f5094b74d",
-      "name": "1234",
-      "author": "author",
-      "descr": "",
-      "parent": "3234f2ee-82f8-4075-819c-6fe3e8796b3a"
-    },
-    {
-      "id": "02d4fdcb-dd71-4f6c-8915-f390acd66aac",
-      "name": "task 222",
-      "author": "author",
-      "descr": "",
-      "parent": "779d5650-a2ff-464d-bce0-119a4f90e0fb",
-      "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
-    },
-    {
-      "id": "19c6cdfe-5899-4796-9f69-296a90a37b2a",
-      "name": "task 111",
-      "author": "author",
-      "descr": "",
-      "parent": "5c8922f4-23f6-411c-aea8-bd6dee07d13d",
-      "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
-    },
-    {
-      "id": "39106826-6260-4d9c-a499-5d5f6a9ba983",
-      "name": "323123",
-      "author": "author",
-      "descr": "",
-      "parent": "d2e0c6f5-b6c1-470d-87be-5b0ef4a7ec0f",
-      "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
-    },
-    {
-      "id": "70b359a3-bc1d-4b02-9379-b9cfaaa8d76e",
-      "name": "32323",
-      "author": "author",
-      "descr": "",
-      "parent": "17f91320-5086-4d0e-8318-aa72e32799b7",
-      "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
-    },
-    {
-      "id": "1bfada6c-ebbb-4966-b048-cb9f51f2fd33",
-      "name": "4213",
-      "author": "author",
-      "descr": "",
-      "parent": "369da5fd-4de8-48ed-8709-bc3cbd498acd",
-      "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
-    },
-    {
-      "id": "46eef4c1-eb47-41cb-a6c6-bf7e5f421665",
-      "name": "432",
-      "author": "author",
-      "descr": "",
-      "parent": "369da5fd-4de8-48ed-8709-bc3cbd498acd",
-      "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
-    },
-    {
       "id": "b091f90c-ef29-4064-92b9-9eee4b178a13",
       "name": "task 2",
       "author": "ivan",
-      "descr": "xdsds d",
+      "description": "xdsds d",
       "parent": 11,
-      "boardParent": 1,
-      "columnName": "column 1"
+      "boardParent": 1
     },
     {
       "id": "674c033d-8c4e-4546-a547-b241ff860300",
       "name": "task 1",
       "author": "ivan",
-      "descr": "",
+      "description": "",
       "parent": "37ac66a4-3f74-4a11-a3e5-c7ba60f059d4",
       "boardParent": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b"
     },
@@ -209,40 +97,20 @@
       "id": "a1fe1694-047f-44d0-ac4e-013c9597000f",
       "name": "task 4",
       "author": "ivan",
-      "descr": "111",
+      "description": "111",
       "parent": "2cb05c9a-bd87-4d6f-a94a-7de8df6e2ff2",
-      "boardParent": "c61cf027-099f-43d7-b98b-447b9b8b474f",
-      "columnName": "column 3"
+      "boardParent": "c61cf027-099f-43d7-b98b-447b9b8b474f"
     },
     {
       "id": "396e6176-c715-43df-beb4-452eb40c30cb",
       "name": "task 3",
       "author": "ivan",
-      "descr": " qweerwrer ",
+      "description": " qweerwrer ",
       "parent": 11,
-      "boardParent": 1,
-      "columnName": "column 1"
+      "boardParent": 1
     }
   ],
   "comments": [
-    {
-      "id": "0eaa5754-4c36-4c13-bcec-20217435b16d",
-      "text": "comment 1",
-      "author": "Виктор",
-      "parent": 111
-    },
-    {
-      "id": "04b16a4f-b8b6-42c9-a74b-b87794fa38eb",
-      "text": "comment 2 авдлапвдлп плвдж плваджлп джвалджплвадж плвдж",
-      "author": "Виктор",
-      "parent": 111
-    },
-    {
-      "id": "59baa49d-a36f-49bf-95c7-83c845fc7173",
-      "text": "dsdsd sdsdsd",
-      "author": "Виктор",
-      "parent": "0d524e40-7d76-4dfa-80e8-f8c1905e040a"
-    },
     {
       "id": "92ff4f85-7370-41ed-89aa-6772a3d1b780",
       "text": "comment",
@@ -272,6 +140,46 @@
       "text": "comment 1",
       "author": "ivan",
       "parent": "396e6176-c715-43df-beb4-452eb40c30cb",
+      "columnParent": 11,
+      "boardParent": 1
+    },
+    {
+      "id": "5478e1dc-22d8-4404-ba66-71ff4f5afcee",
+      "text": "1234adad222",
+      "author": "ivan",
+      "parent": "b091f90c-ef29-4064-92b9-9eee4b178a13",
+      "columnParent": 11,
+      "boardParent": 1
+    },
+    {
+      "id": "b76cbee8-a92a-48f2-9dab-8ea68289688d",
+      "text": "222",
+      "author": "ivan",
+      "parent": "396e6176-c715-43df-beb4-452eb40c30cb",
+      "columnParent": 11,
+      "boardParent": 1
+    },
+    {
+      "id": "8ea4624b-a178-4f3e-a062-c81bc9d7b65a",
+      "text": "qwwqw33322",
+      "author": "viktor",
+      "parent": "b091f90c-ef29-4064-92b9-9eee4b178a13",
+      "columnParent": 11,
+      "boardParent": 1
+    },
+    {
+      "id": "afb4f994-4a80-4f1e-b2e8-f688661edf3d",
+      "text": "111",
+      "author": "viktor",
+      "parent": "b091f90c-ef29-4064-92b9-9eee4b178a13",
+      "columnParent": 11,
+      "boardParent": 1
+    },
+    {
+      "id": "5ea36af6-4257-4b80-b648-3e4ebf0be31f",
+      "text": "23323",
+      "author": "viktor",
+      "parent": "b091f90c-ef29-4064-92b9-9eee4b178a13",
       "columnParent": 11,
       "boardParent": 1
     }

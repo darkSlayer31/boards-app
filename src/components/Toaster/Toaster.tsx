@@ -5,7 +5,7 @@ const successNotify = (text: string) => toast.success(text);
 const warningNotify = (text: string) => toast.warning(text);
 
 export {
-    errorNotify,
-    successNotify,
-    warningNotify
+  errorNotify,
+  successNotify,
+  warningNotify
 }

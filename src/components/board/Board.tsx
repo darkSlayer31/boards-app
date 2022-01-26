@@ -8,29 +8,25 @@ import BoardRenameForm from '../BoardRenameForm';
 import './board.scss'
 
 const Board = () => {
-    const { activeBoardId } = useAppSelector(state => state);
+  const { activeBoardId } = useAppSelector(state => state);
 
-    if (activeBoardId === '') {
-        return <h5 className="active-board__title">Выберите доску</h5>;
-    }
-
-    return (
-        <>
-            {
-                activeBoardId === '' ? (<h3 className="active-board__title">Выберите доску</h3>)
-                    :
-                    (
-                        <>
-                            <BoardRenameForm />
-                            <div className="columns">
-                                <ColumnsList boardId={activeBoardId} />
-                                <ColumnAddForm />
-                            </div>
-                        </>
-                    )
-            }
-        </>
-    )
+  return (
+    <>
+      {
+        activeBoardId === '' ? (<h2 className="active-board__title">Выберите доску</h2>)
+          :
+          (
+            <>
+              <BoardRenameForm />
+              <div className="columns">
+                <ColumnsList boardId={activeBoardId} />
+                <ColumnAddForm />
+              </div>
+            </>
+          )
+      }
+    </>
+  )
 }
 
 export default Board;
