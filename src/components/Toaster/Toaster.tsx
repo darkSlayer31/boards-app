@@ -1,11 +1,7 @@
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
-const errorNotify = (text: string = 'Что-то пошло не так') => toast.error(text);
+const errorNotify = (text = 'Что-то пошло не так') => toast.error(text);
 const successNotify = (text: string) => toast.success(text);
 const warningNotify = (text: string) => toast.warning(text);
 
-export {
-  errorNotify,
-  successNotify,
-  warningNotify
-}
+export {errorNotify, successNotify, warningNotify};

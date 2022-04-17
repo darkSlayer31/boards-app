@@ -1,20 +1,18 @@
-import { FormEvent, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useAppSelector, useAppDispatch } from "../../hooks";
-import axios from "axios";
+import {FormEvent, useState} from 'react';
+import {v4 as uuidv4} from 'uuid';
+import {useAppSelector, useAppDispatch} from '../../hooks';
+import axios from 'axios';
 
-import { taskCreated } from "../../actions";
-import { errorNotify, successNotify } from "../Toaster";
-import { Task } from '../../types/types'
-
+import {taskCreated} from '../../actions';
+import {errorNotify, successNotify} from '../Toaster';
+import {Task} from '../../types/types';
 
 interface TaskAddFormProps {
-  columnId: string
+  columnId: string;
 }
 
-const TaskAddForm = ({ columnId }: TaskAddFormProps) => {
-
-  const { activeBoardId, activeUser } = useAppSelector(state => state)
+const TaskAddForm = ({columnId}: TaskAddFormProps) => {
+  const {activeBoardId, activeUser} = useAppSelector((state) => state);
   const [taskName, setTaskName] = useState('');
   const dispatch = useAppDispatch();
 
@@ -27,17 +25,18 @@ const TaskAddForm = ({ columnId }: TaskAddFormProps) => {
         author: activeUser.username,
         description: '',
         parent: columnId,
-        boardParent: activeBoardId
-      }
+        boardParent: activeBoardId,
+      };
 
-      axios.post(`http://localhost:3001/tasks`, newTask)
+      axios
+        .post(`http://localhost:3001/tasks`, newTask)
         .then(() => dispatch(taskCreated(newTask)))
         .then(() => successNotify('Задача добавлена'))
         .catch(() => errorNotify());
 
-      setTaskName("");
+      setTaskName('');
     }
-  }
+  };
 
   return (
     <form className="task__add-form" onSubmit={onSubmitHandler}>
@@ -47,10 +46,12 @@ const TaskAddForm = ({ columnId }: TaskAddFormProps) => {
         placeholder="Добавить задачу"
         className="task__add-input"
         value={taskName}
-        onChange={(e) => setTaskName(e.target.value)} ></input>
-      <button className="btn" type="submit">Добавить</button>
+        onChange={(e) => setTaskName(e.target.value)}></input>
+      <button className="btn" type="submit">
+        Добавить
+      </button>
     </form>
-  )
-}
+  );
+};
 
 export default TaskAddForm;

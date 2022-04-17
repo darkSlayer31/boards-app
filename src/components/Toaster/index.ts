@@ -1,1 +1,1 @@
-export {errorNotify, successNotify, warningNotify} from './Toaster'
+export {errorNotify, successNotify, warningNotify} from './Toaster';

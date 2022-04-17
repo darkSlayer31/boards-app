@@ -1,1 +1,1 @@
-export {default} from './CommentsList'
+export {default} from './CommentsList';

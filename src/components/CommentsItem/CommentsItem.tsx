@@ -1,55 +1,56 @@
-import { ChangeEvent, useState, useRef } from "react";
-import { useOnClickOutside } from "usehooks-ts";
-import axios from "axios";
+import {ChangeEvent, useState, useRef} from 'react';
+import {useOnClickOutside} from 'usehooks-ts';
+import axios from 'axios';
 
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { Comment } from "../../types/types";
-import { commentDeleted, commentChanged, commentsFetching } from "../../actions";
-import { errorNotify } from '../Toaster';
+import {useAppSelector, useAppDispatch} from '../../hooks';
+import {Comment} from '../../types/types';
+import {commentDeleted, commentChanged, commentsFetching} from '../../actions';
+import {errorNotify} from '../Toaster';
 
 interface CommentsItemProps {
-  comment: Comment
+  comment: Comment;
 }
 
-const CommentsItem = ({ comment }: CommentsItemProps) => {
-
-  const { activeUser, comments } = useAppSelector(state => state);
+const CommentsItem = ({comment}: CommentsItemProps) => {
+  const {activeUser, comments} = useAppSelector((state) => state);
   const [commentText, setCommentText] = useState(comment.text);
-  const [isEditable, setIsEditable] = useState(false)
+  const [isEditable, setIsEditable] = useState(false);
   const dispatch = useAppDispatch();
   const commentRef = useRef<HTMLLIElement>(null);
 
   const onDelete = (id: string, author: string) => {
     if (activeUser) {
       if (activeUser.username !== author) {
-        errorNotify('Вы не можете удалить чужой комментарий')
+        errorNotify('Вы не можете удалить чужой комментарий');
       } else {
-        axios.delete(`http://localhost:3001/comments/${id}`)
+        axios
+          .delete(`http://localhost:3001/comments/${id}`)
           .then(() => dispatch(commentDeleted(id)))
-          .catch(() => errorNotify())
+          .catch(() => errorNotify());
       }
     }
-  }
+  };
 
   const onChangeComment = (id: string, text: string) => {
-    const comment = comments.find(item => item.id === id)
+    const comment = comments.find((item) => item.id === id);
     const newComment = {
       ...comment,
-      text
-    }
-    dispatch(commentsFetching())
-    axios.put(`http://localhost:3001/comments/${id}`, newComment)
+      text,
+    };
+    dispatch(commentsFetching());
+    axios
+      .put(`http://localhost:3001/comments/${id}`, newComment)
       .then(() => dispatch(commentChanged(id, text)))
-      .catch(() => errorNotify())
+      .catch(() => errorNotify());
 
-    setIsEditable(false)
-  }
+    setIsEditable(false);
+  };
 
   const onClickOutside = () => {
-    setIsEditable(false)
-  }
+    setIsEditable(false);
+  };
 
-  useOnClickOutside(commentRef, onClickOutside)
+  useOnClickOutside(commentRef, onClickOutside);
 
   return (
     <li className="comments__item" ref={commentRef}>
@@ -59,27 +60,33 @@ const CommentsItem = ({ comment }: CommentsItemProps) => {
         </div>
       </div>
 
-      {(isEditable)
-        ? <input className="comments__text" defaultValue={comment.text} onChange={(e: ChangeEvent<HTMLInputElement>) => setCommentText(e.target.value)}></input>
-        : <p className="comments__text">{comment.text}</p>
-      }
+      {isEditable ? (
+        <input
+          className="comments__text"
+          defaultValue={comment.text}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setCommentText(e.target.value)}></input>
+      ) : (
+        <p className="comments__text">{comment.text}</p>
+      )}
 
-      {
-        (activeUser?.username === comment.author && !isEditable) && (
-          <>
-            <button className="comments__change" type="button" onClick={() => setIsEditable(true)}>изменить</button>
-            <button className="comments__change" type="button" onClick={() => onDelete(comment.id, comment.author)}>удалить</button>
-          </>
-        )
-      }
+      {activeUser?.username === comment.author && !isEditable && (
+        <>
+          <button className="comments__change" type="button" onClick={() => setIsEditable(true)}>
+            изменить
+          </button>
+          <button className="comments__change" type="button" onClick={() => onDelete(comment.id, comment.author)}>
+            удалить
+          </button>
+        </>
+      )}
 
-      {
-        (isEditable && comment.author === activeUser?.username) && (
-          <button className="comments__change" type="button" onClick={() => onChangeComment(comment.id, commentText)}>подтвердить</button>
-        )
-      }
+      {isEditable && comment.author === activeUser?.username && (
+        <button className="comments__change" type="button" onClick={() => onChangeComment(comment.id, commentText)}>
+          подтвердить
+        </button>
+      )}
     </li>
-  )
-}
+  );
+};
 
 export default CommentsItem;

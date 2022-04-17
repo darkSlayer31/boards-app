@@ -1,17 +1,17 @@
 .form {
-    width: 600px;
-    margin: 0 2rem;
+  width: 600px;
+  margin: 0 2rem;
 
-    &--comment {
-        margin: 0;
-        width: 100%;
-    }
+  &--comment {
+    margin: 0;
+    width: 100%;
+  }
 
-    &__title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 2rem;
-    }
+  &__title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
 }

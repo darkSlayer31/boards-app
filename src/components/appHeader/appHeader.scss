@@ -1,19 +1,19 @@
 .header {
-    width: 100%;
-    padding: 2rem 0;
+  width: 100%;
+  padding: 2rem 0;
 
-    &__inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    &__title {
-        width: 80%;
-        display: block;
-        font-size: 2.2rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        text-align: center;
-    }
+  &__title {
+    width: 80%;
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+  }
 }

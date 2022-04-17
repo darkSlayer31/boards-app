@@ -1,1 +1,1 @@
-export {default} from './CommentsAddForm'
+export {default} from './CommentsAddForm';

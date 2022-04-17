@@ -1,33 +1,31 @@
-@import "../../styles/vars.scss";
+@import '../../styles/vars.scss';
 
 .workspace {
-    padding: 0 2rem;
-
-
+  padding: 0 2rem;
 }
 
 .active-board__rename {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .active-board__title {
-    margin-left: 1rem;
-    margin-right: 2rem;
-    width: 27rem;
+  margin-left: 1rem;
+  margin-right: 2rem;
+  width: 27rem;
 
-    line-height: 35px;
-    font-size: 20px;
-    border: 0;
-    text-transform: uppercase;
+  line-height: 35px;
+  font-size: 20px;
+  border: 0;
+  text-transform: uppercase;
 
-    &:focus {
-        border: $black 1px solid;
-        border-radius: 4px;
-    }
+  &:focus {
+    border: $black 1px solid;
+    border-radius: 4px;
+  }
 }
 
 .columns {
-    display: flex;
+  display: flex;
 }

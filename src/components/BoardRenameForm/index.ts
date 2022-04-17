@@ -1,1 +1,1 @@
-export {default} from './BoardRenameForm'
+export {default} from './BoardRenameForm';

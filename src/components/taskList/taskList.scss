@@ -1,84 +1,82 @@
-@import "../../styles/vars.scss";
-
+@import '../../styles/vars.scss';
 
 .task {
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-right: 1rem;
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1rem;
 
-        &:hover {
-            background-color: darken(#fff, 10%);
-        }
-
-        &--empty {
-            .task__link {
-                cursor: auto;
-            }
-
-            &:hover {
-                background-color: #fff;
-            }
-        }
+    &:hover {
+      background-color: darken(#fff, 10%);
     }
 
-    &__link {
-        width: 70%;
-        cursor: pointer;
-        padding: 2rem;
-        text-decoration: none;
-        color: #000;
+    &--empty {
+      .task__link {
+        cursor: auto;
+      }
 
+      &:hover {
+        background-color: #fff;
+      }
     }
+  }
 
-    &__btns {
-        width: 30%;
-        display: flex;
-        justify-content: space-between;
+  &__link {
+    width: 70%;
+    cursor: pointer;
+    padding: 2rem;
+    text-decoration: none;
+    color: #000;
+  }
+
+  &__btns {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__add-form {
+    display: flex;
+    flex-direction: column;
+
+    background-color: $blue;
+    padding: 1rem;
+  }
+
+  &__add-input {
+    margin-bottom: 1rem;
+    height: 3rem;
+    padding: 1rem;
+
+    border-radius: 4px;
+    border: 0;
+  }
+
+  //Modal
+
+  &__name {
+    text-transform: uppercase;
+    padding: 1rem;
+    font-weight: 700;
+    width: 50%;
+  }
+
+  &__info {
+    width: 50%;
+    line-height: 1.3;
+  }
+
+  &__descr {
+    margin-bottom: 5rem;
+
+    &-text {
+      line-height: 1.4;
     }
+  }
 
-    &__add-form {
-        display: flex;
-        flex-direction: column;
-
-        background-color: $blue;
-        padding: 1rem;
-    }
-
-    &__add-input {
-        margin-bottom: 1rem;
-        height: 3rem;
-        padding: 1rem;
-
-        border-radius: 4px;
-        border: 0;
-    }
-
-    //Modal
-
-    &__name {
-        text-transform: uppercase;
-        padding: 1rem;
-        font-weight: 700;
-        width: 50%;
-    }
-
-    &__info {
-        width: 50%;
-        line-height: 1.3;
-    }
-
-    &__descr {
-        margin-bottom: 5rem;
-
-        &-text {
-            line-height: 1.4;
-        }
-    }
-
-    &__subtitle {
-        font-weight: 700;
-        margin-bottom: 2rem;
-    }
+  &__subtitle {
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
 }

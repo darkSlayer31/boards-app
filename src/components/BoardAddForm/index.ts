@@ -1,1 +1,1 @@
-export {default} from './BoardAddForm'
+export {default} from './BoardAddForm';

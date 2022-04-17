@@ -1,16 +1,16 @@
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { useState } from "react";
-import axios from "axios";
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useState} from 'react';
+import axios from 'axios';
 
-import CommentsList from "../CommentsList";
-import CommentsAddForm from "../CommentsAddForm";
-import { taskUpdated, activeTaskChanged } from "../../actions";
-import { errorNotify } from "../Toaster";
-import { Task } from '../../types/types'
+import CommentsList from '../CommentsList';
+import CommentsAddForm from '../CommentsAddForm';
+import {taskUpdated, activeTaskChanged} from '../../actions';
+import {errorNotify} from '../Toaster';
+import {Task} from '../../types/types';
 
 const TaskModal = () => {
-  const { activeTask, activeBoardId, boards, activeUser } = useAppSelector(state => state);
-  const activeBoard = boards.find(item => item.id === activeBoardId);
+  const {activeTask, activeBoardId, boards, activeUser} = useAppSelector((state) => state);
+  const activeBoard = boards.find((item) => item.id === activeBoardId);
   const [description, setDescription] = useState(activeTask?.description);
   const [editDescription, setEditDescription] = useState(false);
 
@@ -20,50 +20,56 @@ const TaskModal = () => {
     if (description && activeTask) {
       const newTask: Task = {
         ...activeTask,
-        description
-      }
+        description,
+      };
 
-      axios.put(`http://localhost:3001/tasks/${id}`, newTask)
+      axios
+        .put(`http://localhost:3001/tasks/${id}`, newTask)
         .then(() => dispatch(taskUpdated(id, newTask)))
         .then(() => dispatch(activeTaskChanged(newTask)))
-        .catch(() => errorNotify())
-      setEditDescription(false)
+        .catch(() => errorNotify());
+      setEditDescription(false);
     }
-  }
+  };
 
   return (
     <>
-      {(activeTask && activeBoard && activeUser) && (
+      {activeTask && activeBoard && activeUser && (
         <>
           <div className="modal__header">
             <h2 className="task__name">{activeTask.name}</h2>
             <div className="task__info">
               <p className="task__author">Автор задачи: {activeTask.author}</p>
-              <p className="task__from">Находиться на доске {activeBoard.name} в колонке {activeTask.columnName}</p>
+              <p className="task__from">
+                Находиться на доске {activeBoard.name} в колонке {activeTask.columnName}
+              </p>
             </div>
           </div>
           <div className="task__descr">
             <h3 className="task__subtitle">Описание</h3>
 
-            {((activeTask.description !== '') && !editDescription) && (
+            {activeTask.description !== '' && !editDescription && (
               <>
                 <p className="task__descr-text">{activeTask.description}</p>
                 {activeUser.username === activeTask.author && (
-                  <button className="comments__change" type="button" onClick={() => setEditDescription(true)}>изменить</button>
+                  <button className="comments__change" type="button" onClick={() => setEditDescription(true)}>
+                    изменить
+                  </button>
                 )}
               </>
             )}
 
-            {((activeTask.description === '') || editDescription) && (
+            {(activeTask.description === '' || editDescription) && (
               <>
                 <textarea
                   className="form__control form__control--textarea"
                   name="commentText"
                   placeholder="Опишите вашу задачу"
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-                <button className="btn" type="submit" onClick={() => onChangeDescr(activeTask.id)}>{editDescription ? 'Изменить' : 'Добавить'}</button>
+                  onChange={(e) => setDescription(e.target.value)}></textarea>
+                <button className="btn" type="submit" onClick={() => onChangeDescr(activeTask.id)}>
+                  {editDescription ? 'Изменить' : 'Добавить'}
+                </button>
               </>
             )}
           </div>
@@ -74,7 +80,7 @@ const TaskModal = () => {
         </>
       )}
     </>
-  )
-}
+  );
+};
 
 export default TaskModal;

@@ -1,32 +1,29 @@
-import { useAppSelector } from '../../hooks';
+import {useAppSelector} from '../../hooks';
 
 import ColumnAddForm from '../ColumnAddForm';
 import ColumnsList from '../ColumnsList';
 import BoardRenameForm from '../BoardRenameForm';
 
-
-import './board.scss'
+import './board.scss';
 
 const Board = () => {
-  const { activeBoardId } = useAppSelector(state => state);
+  const {activeBoardId} = useAppSelector((state) => state);
 
   return (
     <>
-      {
-        activeBoardId === '' ? (<h2 className="active-board__title">Выберите доску</h2>)
-          :
-          (
-            <>
-              <BoardRenameForm />
-              <div className="columns">
-                <ColumnsList boardId={activeBoardId} />
-                <ColumnAddForm />
-              </div>
-            </>
-          )
-      }
+      {activeBoardId === '' ? (
+        <h2 className="active-board__title">Выберите доску</h2>
+      ) : (
+        <>
+          <BoardRenameForm />
+          <div className="columns">
+            <ColumnsList boardId={activeBoardId} />
+            <ColumnAddForm />
+          </div>
+        </>
+      )}
     </>
-  )
-}
+  );
+};
 
 export default Board;

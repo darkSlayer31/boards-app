@@ -1,7 +1,7 @@
-import RegisterForm from "../RegisterForm";
-import Login from "../Login";
+import RegisterForm from '../RegisterForm';
+import Login from '../Login';
 
-import './authorization.scss'
+import './authorization.scss';
 
 const Authorization = () => {
   return (
@@ -9,7 +9,7 @@ const Authorization = () => {
       <RegisterForm />
       <Login />
     </div>
-  )
-}
+  );
+};
 
 export default Authorization;

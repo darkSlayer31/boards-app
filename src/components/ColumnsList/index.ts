@@ -1,1 +1,1 @@
-export {default} from './ColumnsList'
+export {default} from './ColumnsList';
