@@ -9,19 +9,15 @@ import './board.scss';
 const Board = () => {
   const {activeBoardId} = useAppSelector((state) => state);
 
-  return (
+  return activeBoardId === '' ? (
+    <h2 className="active-board__title">Выберите доску</h2>
+  ) : (
     <>
-      {activeBoardId === '' ? (
-        <h2 className="active-board__title">Выберите доску</h2>
-      ) : (
-        <>
-          <BoardRenameForm />
-          <div className="columns">
-            <ColumnsList boardId={activeBoardId} />
-            <ColumnAddForm />
-          </div>
-        </>
-      )}
+      <BoardRenameForm />
+      <div className="columns">
+        <ColumnsList boardId={activeBoardId} />
+        <ColumnAddForm />
+      </div>
     </>
   );
 };

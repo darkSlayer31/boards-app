@@ -1,13 +1,12 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
-import {useAppSelector, useAppDispatch} from '../../hooks';
 import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
-
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import {userAdded} from '../../actions';
-import {validateUser} from './utils';
+import validateUser from './utils';
 import {errorNotify, successNotify} from '../Toaster';
 import {User} from '../../types/types';
 
@@ -64,7 +63,7 @@ const Register = () => {
 
   return (
     <div className="form">
-      <ToastContainer hideProgressBar={true} position="top-center" theme="dark" />
+      <ToastContainer hideProgressBar position="top-center" theme="dark" />
       <h2 className="form__title">Регистрация пользователя:</h2>
       <form onSubmit={onSubmitHandler}>
         <div className="form__group">

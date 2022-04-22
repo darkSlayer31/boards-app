@@ -1,8 +1,10 @@
-import {useAppSelector, useAppDispatch} from '../../hooks';
 import {useEffect} from 'react';
 import {ToastContainer} from 'react-toastify';
 import axios from 'axios';
 
+import {User} from 'src/types/types';
+
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import AppHeader from '../AppHeader';
 import Sidebar from '../Sidebar';
 import Board from '../Board';
@@ -26,9 +28,6 @@ import {
 } from '../../actions';
 
 import './app.scss';
-import {User} from 'src/types/types';
-
-//const axios = require('axios');
 
 const App = () => {
   const {activeTask, activeUser, boardsLoadingStatus} = useAppSelector((state) => state);
@@ -71,7 +70,7 @@ const App = () => {
     <>
       {boardsLoadingStatus === 'loading' && <Loader />}
 
-      <ToastContainer hideProgressBar={true} position="top-center" theme="dark" />
+      <ToastContainer hideProgressBar position="top-center" theme="dark" />
 
       {activeUser ? (
         <>

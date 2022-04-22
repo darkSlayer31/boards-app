@@ -13,7 +13,7 @@ const Modal: FC = ({children}) => {
     <div className={modalActive ? 'modal show' : 'modal'} onClick={() => dispatch(setModalActive(false, null))}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <button className="modal__close" type="button" onClick={() => dispatch(setModalActive(false, null))}>
-          <img src={modalCloseIcon} alt="Закрыть"></img>
+          <img src={modalCloseIcon} alt="Закрыть" />
         </button>
         {children}
       </div>

@@ -10,15 +10,13 @@ const ColumnsList = ({boardId}: ColumnsListProps) => {
   const {columns} = useAppSelector((state) => state);
   const filteredColumns = columns.filter((item) => item.parent === boardId);
 
-  return (
+  return filteredColumns.length === 0 ? (
+    <div className="columns__header">Колонок пока нет</div>
+  ) : (
     <>
-      {filteredColumns.length === 0 ? (
-        <div className="columns__header">Колонок пока нет</div>
-      ) : (
-        filteredColumns.map(({id, ...props}) => {
-          return <ColumnsItem key={id} id={id} {...props} />;
-        })
-      )}
+      {filteredColumns.map(({id, ...props}) => {
+        return <ColumnsItem key={id} id={id} {...props} />;
+      })}
     </>
   );
 };

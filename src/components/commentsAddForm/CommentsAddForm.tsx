@@ -50,7 +50,8 @@ const CommentsAddForm = ({taskId, taskParent}: CommentsAddFormProps) => {
           name="commentText"
           placeholder="Текст комментария"
           value={commentText}
-          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setCommentText(e.target.value)}></textarea>
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setCommentText(e.target.value)}
+        />
       </div>
       <button className="btn" type="submit">
         Отправить

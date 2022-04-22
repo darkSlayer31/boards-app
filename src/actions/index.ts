@@ -24,7 +24,7 @@ export const setModalActive = (modalActive: boolean, activeTask: Task | null) =>
 export const usersFetched = (users: User[]) => {
   return {
     type: 'USERS_FETCHED',
-    payload: users ? users : [],
+    payload: users || [],
   };
 };
 

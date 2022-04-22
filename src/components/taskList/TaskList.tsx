@@ -58,15 +58,18 @@ const TaskList = ({columnId, columnName}: TaskListProps) => {
         filteredTasks.map(({id, ...rest}) => {
           return (
             <li className="task__item" key={id}>
-              <div className="task__link" onClick={() => dispatch(setModalActive(true, {id, ...rest, columnName}))}>
+              <div
+                role="button"
+                className="task__link"
+                onClick={() => dispatch(setModalActive(true, {id, ...rest, columnName}))}>
                 <h5 className="task__title">{rest.name}</h5>
               </div>
               <div className="task__btns">
-                <button className="btn--task" onClick={() => onDelete(id)}>
-                  <img src={removeIcon} alt="" className="task__icon"></img>
+                <button type="button" className="btn--task" onClick={() => onDelete(id)}>
+                  <img src={removeIcon} alt="" className="task__icon" />
                 </button>
-                <button className="btn--task" onClick={() => changeColumnParent(id)}>
-                  <img src={nextIcon} alt="" className="task__icon"></img>
+                <button type="button" className="btn--task" onClick={() => changeColumnParent(id)}>
+                  <img src={nextIcon} alt="" className="task__icon" />
                 </button>
               </div>
             </li>

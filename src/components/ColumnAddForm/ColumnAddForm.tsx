@@ -40,7 +40,8 @@ const ColumnAddForm = () => {
             placeholder="Введите заголовок списка"
             className="columns__add-input"
             value={columnName}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value)}></input>
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value)}
+          />
           <button className="btn btn--add-column" type="submit">
             Добавить
           </button>

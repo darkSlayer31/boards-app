@@ -1,6 +1,6 @@
-import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useState} from 'react';
 import axios from 'axios';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 
 import CommentsList from '../CommentsList';
 import CommentsAddForm from '../CommentsAddForm';
@@ -32,55 +32,52 @@ const TaskModal = () => {
     }
   };
 
-  return (
+  return activeTask && activeBoard && activeUser ? (
     <>
-      {activeTask && activeBoard && activeUser && (
-        <>
-          <div className="modal__header">
-            <h2 className="task__name">{activeTask.name}</h2>
-            <div className="task__info">
-              <p className="task__author">Автор задачи: {activeTask.author}</p>
-              <p className="task__from">
-                Находиться на доске {activeBoard.name} в колонке {activeTask.columnName}
-              </p>
-            </div>
-          </div>
-          <div className="task__descr">
-            <h3 className="task__subtitle">Описание</h3>
+      <div className="modal__header">
+        <h2 className="task__name">{activeTask.name}</h2>
+        <div className="task__info">
+          <p className="task__author">Автор задачи: {activeTask.author}</p>
+          <p className="task__from">
+            Находиться на доске {activeBoard.name} в колонке {activeTask.columnName}
+          </p>
+        </div>
+      </div>
+      <div className="task__descr">
+        <h3 className="task__subtitle">Описание</h3>
 
-            {activeTask.description !== '' && !editDescription && (
-              <>
-                <p className="task__descr-text">{activeTask.description}</p>
-                {activeUser.username === activeTask.author && (
-                  <button className="comments__change" type="button" onClick={() => setEditDescription(true)}>
-                    изменить
-                  </button>
-                )}
-              </>
+        {activeTask.description !== '' && !editDescription && (
+          <>
+            <p className="task__descr-text">{activeTask.description}</p>
+            {activeUser.username === activeTask.author && (
+              <button className="comments__change" type="button" onClick={() => setEditDescription(true)}>
+                изменить
+              </button>
             )}
+          </>
+        )}
 
-            {(activeTask.description === '' || editDescription) && (
-              <>
-                <textarea
-                  className="form__control form__control--textarea"
-                  name="commentText"
-                  placeholder="Опишите вашу задачу"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}></textarea>
-                <button className="btn" type="submit" onClick={() => onChangeDescr(activeTask.id)}>
-                  {editDescription ? 'Изменить' : 'Добавить'}
-                </button>
-              </>
-            )}
-          </div>
+        {(activeTask.description === '' || editDescription) && (
+          <>
+            <textarea
+              className="form__control form__control--textarea"
+              name="commentText"
+              placeholder="Опишите вашу задачу"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <button className="btn" type="submit" onClick={() => onChangeDescr(activeTask.id)}>
+              {editDescription ? 'Изменить' : 'Добавить'}
+            </button>
+          </>
+        )}
+      </div>
 
-          <h3 className="task__subtitle">Комментарии:</h3>
-          <CommentsAddForm taskId={activeTask.id} taskParent={activeTask.parent} />
-          <CommentsList taskId={activeTask.id} />
-        </>
-      )}
+      <h3 className="task__subtitle">Комментарии:</h3>
+      <CommentsAddForm taskId={activeTask.id} taskParent={activeTask.parent} />
+      <CommentsList taskId={activeTask.id} />
     </>
-  );
+  ) : null;
 };
 
 export default TaskModal;

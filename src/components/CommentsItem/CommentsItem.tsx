@@ -64,7 +64,8 @@ const CommentsItem = ({comment}: CommentsItemProps) => {
         <input
           className="comments__text"
           defaultValue={comment.text}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setCommentText(e.target.value)}></input>
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setCommentText(e.target.value)}
+        />
       ) : (
         <p className="comments__text">{comment.text}</p>
       )}

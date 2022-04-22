@@ -1,5 +1,6 @@
-import {useAppSelector, useAppDispatch} from '../../hooks';
 import {ChangeEvent, FormEvent, useState} from 'react';
+
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import {activeUserChanged} from '../../actions';
 import {errorNotify} from '../Toaster';
 

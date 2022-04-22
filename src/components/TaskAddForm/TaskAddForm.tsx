@@ -1,7 +1,7 @@
 import {FormEvent, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
-import {useAppSelector, useAppDispatch} from '../../hooks';
 import axios from 'axios';
+import {useAppSelector, useAppDispatch} from '../../hooks';
 
 import {taskCreated} from '../../actions';
 import {errorNotify, successNotify} from '../Toaster';
@@ -46,7 +46,8 @@ const TaskAddForm = ({columnId}: TaskAddFormProps) => {
         placeholder="Добавить задачу"
         className="task__add-input"
         value={taskName}
-        onChange={(e) => setTaskName(e.target.value)}></input>
+        onChange={(e) => setTaskName(e.target.value)}
+      />
       <button className="btn" type="submit">
         Добавить
       </button>
