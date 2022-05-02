@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {activeUserChanged} from '../../actions';
+import {activeUserChanged} from '../../slices/usersSlice/usersSlise';
 import {errorNotify} from '../Toaster';
 
 interface UserData {
@@ -11,7 +11,7 @@ interface UserData {
 
 const Login = () => {
   const dispatch = useAppDispatch();
-  const {users} = useAppSelector((state) => state);
+  const {users} = useAppSelector((state) => state.users);
   const [userData, setUserData] = useState<UserData>(() => {
     return {
       username: '',

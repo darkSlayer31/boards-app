@@ -17,7 +17,7 @@ export interface Column {
   parent: string;
 }
 
-export interface Task {
+export type Task = {
   id: string;
   name: string;
   author: string;
@@ -25,7 +25,7 @@ export interface Task {
   parent: string;
   boardParent: string;
   columnName?: string;
-}
+};
 
 export interface Comment {
   id: string;

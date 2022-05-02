@@ -1,10 +1,10 @@
-import {activeUserChanged} from 'src/actions';
+import {activeUserChanged} from '../../slices/usersSlice/usersSlise';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
 import './appHeader.scss';
 
 const AppHeader = () => {
-  const {activeUser} = useAppSelector((state) => state);
+  const {activeUser} = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
 
   const onExitHandler = () => {

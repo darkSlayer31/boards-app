@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
-import {taskCreated} from '../../actions';
+import {taskCreated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 import {Task} from '../../types/types';
 
@@ -12,7 +12,8 @@ interface TaskAddFormProps {
 }
 
 const TaskAddForm = ({columnId}: TaskAddFormProps) => {
-  const {activeBoardId, activeUser} = useAppSelector((state) => state);
+  const {activeBoardId} = useAppSelector((state) => state.boards);
+  const {activeUser} = useAppSelector((state) => state.users);
   const [taskName, setTaskName] = useState('');
   const dispatch = useAppDispatch();
 

@@ -7,7 +7,7 @@ import BoardRenameForm from '../BoardRenameForm';
 import './board.scss';
 
 const Board = () => {
-  const {activeBoardId} = useAppSelector((state) => state);
+  const {activeBoardId} = useAppSelector((state) => state.boards);
 
   return activeBoardId === '' ? (
     <h2 className="active-board__title">Выберите доску</h2>

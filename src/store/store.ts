@@ -1,8 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit';
-import reducer from '../reducers';
+import boards from '../slices/boardsSlice/boardsSlice';
+import users from '../slices/usersSlice/usersSlise';
 
 export const store = configureStore({
-  reducer,
+  reducer: {boards, users},
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: process.env.NODE_ENV !== 'production',
 });

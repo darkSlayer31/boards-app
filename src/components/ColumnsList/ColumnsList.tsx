@@ -7,7 +7,7 @@ interface ColumnsListProps {
 }
 
 const ColumnsList = ({boardId}: ColumnsListProps) => {
-  const {columns} = useAppSelector((state) => state);
+  const {columns} = useAppSelector((state) => state.boards);
   const filteredColumns = columns.filter((item) => item.parent === boardId);
 
   return filteredColumns.length === 0 ? (

@@ -1,20 +1,20 @@
 import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {boardDeleted, activeBoardChanged} from '../../actions';
+import {activeBoardChanged, boardDeleted} from 'src/slices/boardsSlice/boardsSlice';
 import BoardAddForm from '../BoardAddForm';
 
 import './sidebar.scss';
 import {errorNotify} from '../Toaster';
 
 const Sidebar = () => {
-  const {boards, boardsLoadingStatus} = useAppSelector((state) => state);
+  const {boards, boardsLoadingStatus} = useAppSelector((state) => state.boards);
   const dispatch = useAppDispatch();
 
   const onDelete = (id: string) => {
     axios
       .delete(`http://localhost:3001/boards/${id}`)
-      .then(() => dispatch(activeBoardChanged(null)))
+      .then(() => dispatch(activeBoardChanged('')))
       .then(() => dispatch(boardDeleted(id)))
       .catch(() => errorNotify());
   };

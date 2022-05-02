@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {Comment} from '../../types/types';
-import {commentDeleted, commentChanged, commentsFetching} from '../../actions';
+import {commentDeleted, commentUpdated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify} from '../Toaster';
 
 interface CommentsItemProps {
@@ -12,7 +12,8 @@ interface CommentsItemProps {
 }
 
 const CommentsItem = ({comment}: CommentsItemProps) => {
-  const {activeUser, comments} = useAppSelector((state) => state);
+  const {comments} = useAppSelector((state) => state.boards);
+  const {activeUser} = useAppSelector((state) => state.users);
   const [commentText, setCommentText] = useState(comment.text);
   const [isEditable, setIsEditable] = useState(false);
   const dispatch = useAppDispatch();
@@ -33,17 +34,18 @@ const CommentsItem = ({comment}: CommentsItemProps) => {
 
   const onChangeComment = (id: string, text: string) => {
     const comment = comments.find((item) => item.id === id);
-    const newComment = {
-      ...comment,
-      text,
-    };
-    dispatch(commentsFetching());
-    axios
-      .put(`http://localhost:3001/comments/${id}`, newComment)
-      .then(() => dispatch(commentChanged(id, text)))
-      .catch(() => errorNotify());
+    if (comment) {
+      const newComment = {
+        ...comment,
+        text,
+      };
+      axios
+        .put(`http://localhost:3001/comments/${id}`, newComment)
+        .then(() => dispatch(commentUpdated(newComment)))
+        .catch(() => errorNotify());
 
-    setIsEditable(false);
+      setIsEditable(false);
+    }
   };
 
   const onClickOutside = () => {

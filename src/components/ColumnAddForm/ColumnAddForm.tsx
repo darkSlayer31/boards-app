@@ -3,11 +3,11 @@ import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {columnCreated} from '../../actions';
+import {columnCreated} from '../../slices/boardsSlice/boardsSlice';
 import {successNotify, errorNotify} from '../Toaster';
 
 const ColumnAddForm = () => {
-  const {activeBoardId} = useAppSelector((state) => state);
+  const {activeBoardId} = useAppSelector((state) => state.boards);
   const [columnName, setColumnName] = useState('');
   const dispatch = useAppDispatch();
 

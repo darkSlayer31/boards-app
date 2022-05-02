@@ -8,7 +8,7 @@ interface CommentsListProps {
 }
 
 const CommentsList = ({taskId}: CommentsListProps) => {
-  const {comments} = useAppSelector((state) => state);
+  const {comments} = useAppSelector((state) => state.boards);
   const filteredComments = comments.filter((item) => item.parent === taskId);
 
   return filteredComments.length === 0 ? (

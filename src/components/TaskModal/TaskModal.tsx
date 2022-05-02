@@ -4,12 +4,13 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 
 import CommentsList from '../CommentsList';
 import CommentsAddForm from '../CommentsAddForm';
-import {taskUpdated, activeTaskChanged} from '../../actions';
+import {taskUpdated, activeTaskChanged} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify} from '../Toaster';
 import {Task} from '../../types/types';
 
 const TaskModal = () => {
-  const {activeTask, activeBoardId, boards, activeUser} = useAppSelector((state) => state);
+  const {activeTask, activeBoardId, boards} = useAppSelector((state) => state.boards);
+  const {activeUser} = useAppSelector((state) => state.users);
   const activeBoard = boards.find((item) => item.id === activeBoardId);
   const [description, setDescription] = useState(activeTask?.description);
   const [editDescription, setEditDescription] = useState(false);
@@ -25,7 +26,7 @@ const TaskModal = () => {
 
       axios
         .put(`http://localhost:3001/tasks/${id}`, newTask)
-        .then(() => dispatch(taskUpdated(id, newTask)))
+        .then(() => dispatch(taskUpdated(newTask)))
         .then(() => dispatch(activeTaskChanged(newTask)))
         .catch(() => errorNotify());
       setEditDescription(false);

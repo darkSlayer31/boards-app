@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 import {useDispatch} from 'react-redux';
 import axios from 'axios';
 
-import {boardCreated} from '../../actions';
+import {boardCreated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 
 const BoardAddForm = () => {

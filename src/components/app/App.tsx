@@ -23,14 +23,14 @@ import {
   columnsFetchingError,
   commentsFetched,
   commentsFetchingError,
-  usersFetched,
-  activeUserChanged,
-} from '../../actions';
+} from '../../slices/boardsSlice/boardsSlice';
+import {usersFetched, activeUserChanged} from 'src/slices/usersSlice/usersSlise';
 
 import './app.scss';
 
 const App = () => {
-  const {activeTask, activeUser, boardsLoadingStatus} = useAppSelector((state) => state);
+  const {activeTask, boardsLoadingStatus} = useAppSelector((state) => state.boards);
+  const {activeUser} = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

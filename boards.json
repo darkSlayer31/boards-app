@@ -166,7 +166,7 @@
     },
     {
       "id": "8ea4624b-a178-4f3e-a062-c81bc9d7b65a",
-      "text": "qwwqw33322",
+      "text": "qwwqw3332222",
       "author": "viktor",
       "parent": "b091f90c-ef29-4064-92b9-9eee4b178a13",
       "columnParent": 11,
@@ -182,9 +182,17 @@
     },
     {
       "id": "5ea36af6-4257-4b80-b648-3e4ebf0be31f",
-      "text": "23323",
+      "text": "21",
       "author": "viktor",
       "parent": "b091f90c-ef29-4064-92b9-9eee4b178a13",
+      "columnParent": 11,
+      "boardParent": 1
+    },
+    {
+      "id": "62f64608-88f9-49bb-abf5-48e7a3b9a36e",
+      "text": "dfdfeee",
+      "author": "viktor",
+      "parent": "396e6176-c715-43df-beb4-452eb40c30cb",
       "columnParent": 11,
       "boardParent": 1
     }

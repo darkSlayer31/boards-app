@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {Comment} from '../../types/types';
-import {commentCreated} from '../../actions';
+import {commentCreated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 
 import './commentsAddForm.scss';
@@ -15,7 +15,8 @@ interface CommentsAddFormProps {
 }
 
 const CommentsAddForm = ({taskId, taskParent}: CommentsAddFormProps) => {
-  const {activeBoardId, activeUser} = useAppSelector((state) => state);
+  const {activeBoardId} = useAppSelector((state) => state.boards);
+  const {activeUser} = useAppSelector((state) => state.users);
 
   const [commentText, setCommentText] = useState('');
   const dispatch = useAppDispatch();

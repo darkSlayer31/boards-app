@@ -5,7 +5,7 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {userAdded} from '../../actions';
+import {userAdded} from '../../slices/usersSlice/usersSlise';
 import validateUser from './utils';
 import {errorNotify, successNotify} from '../Toaster';
 import {User} from '../../types/types';
@@ -14,7 +14,7 @@ import './register.scss';
 
 const Register = () => {
   const dispatch = useAppDispatch();
-  const {users} = useAppSelector((state) => state);
+  const {users} = useAppSelector((state) => state.users);
 
   const [userData, setUserData] = useState(() => {
     return {
