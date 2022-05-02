@@ -9,10 +9,10 @@ import {errorNotify, successNotify} from '../Toaster';
 
 import './commentsAddForm.scss';
 
-interface CommentsAddFormProps {
+type CommentsAddFormProps = {
   taskId: string;
   taskParent: string;
-}
+};
 
 const CommentsAddForm = ({taskId, taskParent}: CommentsAddFormProps) => {
   const {activeBoardId} = useAppSelector((state) => state.boards);

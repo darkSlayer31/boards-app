@@ -10,10 +10,10 @@ import './taskList.scss';
 import nextIcon from '../../assets/images/icons/arrow-next-icon.svg';
 import removeIcon from '../../assets/images/icons/delete-icon.svg';
 
-interface TaskListProps {
+type TaskListProps = {
   columnId: string;
   columnName: string;
-}
+};
 
 const TaskList = ({columnId, columnName}: TaskListProps) => {
   const {tasks, columns, activeBoardId} = useAppSelector((state) => state.boards);

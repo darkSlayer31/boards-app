@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Board, Column, Task, Comment} from '../../types/types';
 
-interface boardsState {
+type boardsState = {
   boards: Board[];
   columns: Column[];
   tasks: Task[];
@@ -10,7 +10,7 @@ interface boardsState {
   activeBoardId: string;
   activeTask: Task | null;
   modalActive: boolean;
-}
+};
 
 const initialState: boardsState = {
   boards: [],

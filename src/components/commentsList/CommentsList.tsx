@@ -3,9 +3,9 @@ import CommentsItem from '../CommentsItem/CommentsItem';
 
 import './commentsList.scss';
 
-interface CommentsListProps {
+type CommentsListProps = {
   taskId: string;
-}
+};
 
 const CommentsList = ({taskId}: CommentsListProps) => {
   const {comments} = useAppSelector((state) => state.boards);

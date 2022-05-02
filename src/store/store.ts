@@ -2,7 +2,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import boards from '../slices/boardsSlice/boardsSlice';
 import users from '../slices/usersSlice/usersSlise';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {boards, users},
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: process.env.NODE_ENV !== 'production',
@@ -10,3 +10,5 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

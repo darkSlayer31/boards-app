@@ -7,9 +7,9 @@ import {taskCreated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 import {Task} from '../../types/types';
 
-interface TaskAddFormProps {
+type TaskAddFormProps = {
   columnId: string;
-}
+};
 
 const TaskAddForm = ({columnId}: TaskAddFormProps) => {
   const {activeBoardId} = useAppSelector((state) => state.boards);

@@ -2,9 +2,9 @@ import {useAppSelector} from '../../hooks';
 
 import ColumnsItem from '../ColumnsItem';
 
-interface ColumnsListProps {
+type ColumnsListProps = {
   boardId: string;
-}
+};
 
 const ColumnsList = ({boardId}: ColumnsListProps) => {
   const {columns} = useAppSelector((state) => state.boards);

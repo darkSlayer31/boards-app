@@ -8,10 +8,10 @@ import {errorNotify} from '../Toaster';
 
 import './columnsItem.scss';
 
-interface ColumnsItemProps {
+type ColumnsItemProps = {
   id: string;
   name: string;
-}
+};
 
 const ColumnsItem = ({id, name}: ColumnsItemProps) => {
   const tasks = useAppSelector((state) => state.boards.tasks);

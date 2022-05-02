@@ -1,21 +1,21 @@
-export interface User {
+export type User = {
   username: string;
   email: string;
   password: string;
   password2: string;
   id: string;
-}
+};
 
-export interface Board {
+export type Board = {
   id: string;
   name: string;
-}
+};
 
-export interface Column {
+export type Column = {
   id: string;
   name: string;
   parent: string;
-}
+};
 
 export type Task = {
   id: string;
@@ -27,14 +27,14 @@ export type Task = {
   columnName?: string;
 };
 
-export interface Comment {
+export type Comment = {
   id: string;
   text: string;
   author: string;
   parent: string;
   columnParent: string;
   boardParent: string;
-}
+};
 
 export type Prop = {
   isShow: boolean;

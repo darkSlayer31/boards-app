@@ -4,10 +4,10 @@ import {useAppSelector, useAppDispatch} from '../../hooks';
 import {activeUserChanged} from '../../slices/usersSlice/usersSlise';
 import {errorNotify} from '../Toaster';
 
-interface UserData {
+type UserData = {
   username: string;
   password: string;
-}
+};
 
 const Login = () => {
   const dispatch = useAppDispatch();

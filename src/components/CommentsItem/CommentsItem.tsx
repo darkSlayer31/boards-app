@@ -7,9 +7,9 @@ import {Comment} from '../../types/types';
 import {commentDeleted, commentUpdated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify} from '../Toaster';
 
-interface CommentsItemProps {
+type CommentsItemProps = {
   comment: Comment;
-}
+};
 
 const CommentsItem = ({comment}: CommentsItemProps) => {
   const {comments} = useAppSelector((state) => state.boards);
