@@ -18,7 +18,7 @@
   "boards": [
     {
       "id": 1,
-      "name": "board 11"
+      "name": "board 1"
     },
     {
       "id": "e0c11f0d-aeb7-42f3-a4d5-9dc0922da93b",
@@ -27,6 +27,10 @@
     {
       "id": "c61cf027-099f-43d7-b98b-447b9b8b474f",
       "name": "board 3"
+    },
+    {
+      "id": "d8dea4b1-1813-4414-b4e0-0560300f79ab",
+      "name": "ddd"
     }
   ],
   "columns": [
@@ -74,11 +78,6 @@
       "id": "3ba458e4-6039-47d5-b19f-27b14fef5ac5",
       "name": "11",
       "parent": "eb2624e6-e574-44f2-87cc-a65a6c380341"
-    },
-    {
-      "id": "1ec18e0a-8690-49d8-b3cf-fbcf40709cd5",
-      "name": "ffff",
-      "parent": 1
     }
   ],
   "tasks": [

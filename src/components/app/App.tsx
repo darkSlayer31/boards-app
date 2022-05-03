@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import {ToastContainer} from 'react-toastify';
 import axios from 'axios';
+import {batch} from 'react-redux';
 
 import {User} from 'src/types/types';
 
@@ -18,13 +19,11 @@ import {
   boardsFetching,
   boardsFetchingError,
   tasksFetched,
-  tasksFetchingError,
   columnsFetched,
-  columnsFetchingError,
   commentsFetched,
-  commentsFetchingError,
 } from '../../slices/boardsSlice/boardsSlice';
 import {usersFetched, activeUserChanged} from 'src/slices/usersSlice/usersSlise';
+import {Board as BoardType, Task, Column, Comment} from 'src/types/types';
 
 import './app.scss';
 
@@ -33,36 +32,40 @@ const App = () => {
   const {activeUser} = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(boardsFetching());
-    axios
-      .get('http://localhost:3001/boards')
-      .then((res) => dispatch(boardsFetched(res.data)))
-      .catch(() => dispatch(boardsFetchingError()));
-    axios
-      .get('http://localhost:3001/columns')
-      .then((res) => dispatch(columnsFetched(res.data)))
-      .catch(() => dispatch(columnsFetchingError()));
-    axios
-      .get('http://localhost:3001/tasks')
-      .then((res) => dispatch(tasksFetched(res.data)))
-      .catch(() => dispatch(tasksFetchingError()));
-    axios
-      .get('http://localhost:3001/comments')
-      .then((res) => dispatch(commentsFetched(res.data)))
-      .catch(() => dispatch(commentsFetchingError()));
-    axios
-      .get('http://localhost:3001/users')
-      .then((res) => {
-        dispatch(usersFetched(res.data));
-        const usersData = [...(res.data as User[])];
-        const localUser = usersData.find((item) => item.username === localStorage.getItem('user'));
+  const fetchData = async () => {
+    try {
+      dispatch(boardsFetching());
+      const boards = (await axios.get<BoardType[]>('http://localhost:3001/boards')).data;
+      const columns = (await axios.get<Column[]>('http://localhost:3001/columns')).data;
+      const tasks = (await axios.get<Task[]>('http://localhost:3001/tasks')).data;
+      const comments = (await axios.get<Comment[]>('http://localhost:3001/comments')).data;
 
-        if (localUser) {
-          dispatch(activeUserChanged(localUser));
-        }
-      })
-      .catch((err) => errorNotify(err));
+      batch(() => {
+        dispatch(boardsFetched(boards));
+        dispatch(columnsFetched(columns));
+        dispatch(tasksFetched(tasks));
+        dispatch(commentsFetched(comments));
+      });
+    } catch {
+      dispatch(boardsFetchingError());
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get('http://localhost:3001/users');
+      dispatch(usersFetched(res.data));
+      const usersData = [...(res.data as User[])];
+      const localUser = usersData.find((item) => item.username === localStorage.getItem('user'));
+      localUser && dispatch(activeUserChanged(localUser));
+    } catch {
+      errorNotify();
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+    fetchData();
     // eslint-disable-next-line
   }, []);
 

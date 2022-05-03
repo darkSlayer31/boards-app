@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 import {useDispatch} from 'react-redux';
 import axios from 'axios';
 
-import {boardCreated} from '../../slices/boardsSlice/boardsSlice';
+import {activeBoardChanged, boardCreated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 
 const BoardAddForm = () => {
@@ -19,8 +19,11 @@ const BoardAddForm = () => {
 
     axios
       .post('http://localhost:3001/boards', newBoard)
-      .then(() => dispatch(boardCreated(newBoard)))
-      .then(() => successNotify('Доска создана'))
+      .then(() => {
+        dispatch(boardCreated(newBoard));
+        dispatch(activeBoardChanged(newBoard.id));
+        successNotify('Доска создана');
+      })
       .catch(() => errorNotify());
 
     setBoardName('');

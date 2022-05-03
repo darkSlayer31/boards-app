@@ -30,5 +30,4 @@ const usersSlice = createSlice({
 const {actions, reducer} = usersSlice;
 
 export default reducer;
-
 export const {userAdded, usersFetched, activeUserChanged} = actions;
