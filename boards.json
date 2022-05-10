@@ -13,6 +13,18 @@
       "password": "Qwerty123",
       "password2": "Qwerty123",
       "id": "64050d49-7cb7-4ad5-bd78-0cfc17677b4b"
+    },
+    {
+      "username": "steezze",
+      "email": "steezze@test.com",
+      "password": "qwerty123",
+      "id": "cb38043a-d475-415f-8cf8-9550faba420d"
+    },
+    {
+      "username": "vpkk",
+      "email": "vpk@test.com",
+      "password": "qwerty123",
+      "id": "d2c68fde-44f1-4291-8ffc-664f6451ff42"
     }
   ],
   "boards": [
@@ -27,10 +39,6 @@
     {
       "id": "c61cf027-099f-43d7-b98b-447b9b8b474f",
       "name": "board 3"
-    },
-    {
-      "id": "d8dea4b1-1813-4414-b4e0-0560300f79ab",
-      "name": "ddd"
     }
   ],
   "columns": [

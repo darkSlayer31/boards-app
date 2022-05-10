@@ -1,3 +1,5 @@
+@import '../../styles/vars.scss';
+
 .form {
   width: 600px;
   margin: 0 2rem;
@@ -13,5 +15,25 @@
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 2rem;
+  }
+
+  &__error {
+    color: red;
+    margin-bottom: 1rem;
+  }
+
+  &__control {
+    margin-bottom: 1rem;
+
+    padding: 0.5rem 0 0.75rem;
+    display: block;
+    width: 100%;
+
+    background: none;
+    border: none;
+    border-bottom: 1px solid $blue;
+    border-radius: 0;
+    box-shadow: none;
+    font-family: inherit;
   }
 }

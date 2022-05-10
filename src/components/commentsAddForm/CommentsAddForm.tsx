@@ -7,8 +7,6 @@ import {Comment} from '../../types/types';
 import {commentCreated} from '../../slices/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 
-import './commentsAddForm.scss';
-
 type CommentsAddFormProps = {
   taskId: string;
   taskParent: string;

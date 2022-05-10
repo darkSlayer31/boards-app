@@ -1,12 +1,13 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
+import * as Yup from 'yup';
+import {useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {userAdded} from '../../slices/usersSlice/usersSlise';
-import validateUser from './utils';
 import {errorNotify, successNotify} from '../Toaster';
 import {User} from '../../types/types';
 
@@ -16,28 +17,42 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const {users} = useAppSelector((state) => state.users);
 
-  const [userData, setUserData] = useState(() => {
-    return {
-      username: '',
-      email: '',
-      password: '',
-      password2: '',
-    };
+  const userSchema = Yup.object({
+    username: Yup.string()
+      .min(4, 'Минимум символов 4')
+      .max(12, 'Максимум символов 12')
+      .matches(/^[A-Za-z0-9]+$/, 'Только латиница')
+      .required('Поле обязательно к заполнению'),
+    email: Yup.string().email('Некорректный email адрес').required('Поле обязательно к заполнению'),
+    password: Yup.string()
+      .min(6, 'Минимум символов 6')
+      .matches(/^[A-Za-z0-9]+$/, 'Только латиница')
+      .required('Поле обязательно к заполнению'),
+    password2: Yup.string().oneOf([Yup.ref('password'), null], 'Пароли должны совпадать'),
   });
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserData((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
+  type FormUser = Yup.InferType<typeof userSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    formState: {errors, isValid},
+    reset,
+  } = useForm<FormUser>({mode: 'onBlur', resolver: yupResolver(userSchema)});
+
+  const registerUser = async (user: User) => {
+    await axios
+      .post('http://localhost:3001/users', user)
+      .then(() => dispatch(userAdded(user)))
+      .then(() => successNotify('Вы успешно зарегистрированы'))
+      .catch(() => errorNotify('Что-то пошло не так'));
   };
 
-  const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = handleSubmit((userData) => {
     const user: User = {
-      ...userData,
+      username: userData.username,
+      email: userData.email,
+      password: userData.password,
       id: uuidv4(),
     };
 
@@ -45,81 +60,45 @@ const Register = () => {
 
     if (sameUser) {
       errorNotify('Такой пользователь уже существует');
-    } else if (validateUser(user)) {
-      await axios
-        .post('http://localhost:3001/users', user)
-        .then(() => dispatch(userAdded(user)))
-        .then(() => successNotify('Вы успешно зарегистрированы'))
-        .catch(() => errorNotify('Что-то пошло не так'));
+    } else {
+      registerUser(user);
     }
 
-    setUserData({
-      username: '',
-      email: '',
-      password: '',
-      password2: '',
-    });
-  };
+    reset();
+  });
 
   return (
     <div className="form">
       <ToastContainer hideProgressBar position="top-center" theme="dark" />
       <h2 className="form__title">Регистрация пользователя:</h2>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmit}>
         <div className="form__group">
           <label>
-            Имя пользователя:{' '}
-            <input
-              className="form__control"
-              type="username"
-              id="username"
-              name="username"
-              value={userData.username}
-              onChange={onChangeHandler}
-            />
+            Имя пользователя:
+            <input className="form__control" {...register('username')} />
           </label>
+          {errors?.username && <p className="form__error">{errors?.username?.message || 'Ошибка!'}</p>}
         </div>
         <div className="form__group">
           <label>
-            Email:{' '}
-            <input
-              className="form__control"
-              type="email"
-              id="email"
-              name="email"
-              value={userData.email}
-              onChange={onChangeHandler}
-              formNoValidate
-            />
+            Email:
+            <input className="form__control" {...register('email')} />
           </label>
+          {errors?.email && <p className="form__error">{errors?.email?.message || 'Ошибка!'}</p>}
         </div>
         <div className="form__group">
           <label>
-            Пароль:{' '}
-            <input
-              className="form__control"
-              type="password"
-              id="password"
-              name="password"
-              value={userData.password}
-              onChange={onChangeHandler}
-            />
+            Пароль: <input className="form__control" {...register('password')} />
           </label>
+          {errors?.password && <p className="form__error">{errors?.password?.message || 'Ошибка!'}</p>}
         </div>
         <div className="form__group">
           <label>
-            Повторите пароль:{' '}
-            <input
-              className="form__control"
-              type="password"
-              id="password2"
-              name="password2"
-              value={userData.password2}
-              onChange={onChangeHandler}
-            />
+            Повторите пароль: <input className="form__control" {...register('password2')} />
           </label>
+          {errors?.password2 && <p className="form__error">{errors?.password2?.message || 'Ошибка!'}</p>}
         </div>
-        <button className="btn" type="submit">
+        <button className="btn" type="submit" disabled={!isValid}>
           Регистрация
         </button>
       </form>
