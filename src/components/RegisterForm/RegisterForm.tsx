@@ -7,7 +7,7 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {userAdded} from '../../slices/usersSlice/usersSlise';
+import {userAdded} from '../../store/reducers/usersSlice/usersSlise';
 import {errorNotify, successNotify} from '../Toaster';
 import {User} from '../../types/types';
 

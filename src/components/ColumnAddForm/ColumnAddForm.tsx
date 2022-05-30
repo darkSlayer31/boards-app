@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {columnCreated} from '../../slices/boardsSlice/boardsSlice';
+import {columnCreated} from '../../store/reducers/boardsSlice/boardsSlice';
 import {successNotify, errorNotify} from '../Toaster';
 
 const ColumnAddForm = () => {

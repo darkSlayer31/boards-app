@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {boardUpdated} from '../../slices/boardsSlice/boardsSlice';
+import {boardUpdated} from '../../store/reducers/boardsSlice/boardsSlice';
 import {successNotify, errorNotify} from '../Toaster';
 import {Board} from '../../types/types';
 

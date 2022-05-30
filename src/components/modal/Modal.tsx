@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {batch} from 'react-redux';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {setModalActive, activeTaskChanged} from '../../slices/boardsSlice/boardsSlice';
+import {setModalActive, activeTaskChanged} from '../../store/reducers/boardsSlice/boardsSlice';
 import './modal.scss';
 
 import modalCloseIcon from '../../assets/images/icons/modal-close.svg';

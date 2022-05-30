@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 
-import {taskCreated} from '../../slices/boardsSlice/boardsSlice';
+import {taskCreated} from '../../store/reducers/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 import {Task} from '../../types/types';
 

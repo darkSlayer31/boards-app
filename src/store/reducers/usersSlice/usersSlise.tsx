@@ -4,11 +4,13 @@ import {User} from 'src/types/types';
 type usersState = {
   users: User[];
   activeUser: User | null;
+  usersLoadingStatus: string;
 };
 
 const initialState: usersState = {
   users: [],
   activeUser: null,
+  usersLoadingStatus: 'idle',
 };
 
 const usersSlice = createSlice({

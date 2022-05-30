@@ -3,7 +3,7 @@ import {useAppSelector, useAppDispatch} from '../../hooks';
 
 import TaskList from '../TaskList/TaskList';
 import TaskAddForm from '../TaskAddForm/TaskAddForm';
-import {columnDeleted} from '../../slices/boardsSlice/boardsSlice';
+import {columnDeleted} from '../../store/reducers/boardsSlice/boardsSlice';
 import {errorNotify} from '../Toaster';
 
 import './columnsItem.scss';

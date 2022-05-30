@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Board, Column, Task, Comment} from '../../types/types';
+import {Board, Column, Task, Comment} from '../../../types/types';
+import {fetchBoards} from '../action-creators';
 
 type boardsState = {
   boards: Board[];
@@ -7,6 +8,7 @@ type boardsState = {
   tasks: Task[];
   comments: Comment[];
   boardsLoadingStatus: string;
+  dataLoadingStatus: string;
   activeBoardId: string;
   activeTask: Task | null;
   modalActive: boolean;
@@ -19,6 +21,7 @@ const initialState: boardsState = {
   comments: [],
   activeBoardId: '',
   boardsLoadingStatus: 'idle',
+  dataLoadingStatus: 'idle',
   activeTask: null,
   modalActive: false,
 };
@@ -27,15 +30,15 @@ const boardsSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    boardsFetching(state) {
-      state.boardsLoadingStatus = 'loading';
+    dataFetching(state) {
+      state.dataLoadingStatus = 'loading';
     },
-    boardsFetched(state, action: PayloadAction<Board[]>) {
-      state.boards = action.payload;
-      state.boardsLoadingStatus = 'idle';
-    },
-    boardsFetchingError(state) {
-      state.boardsLoadingStatus = 'error';
+    // boardsFetched(state, action: PayloadAction<Board[]>) {
+    //   state.boards = action.payload;
+    //   state.boardsLoadingStatus = 'idle';
+    // },
+    dataFetchingError(state) {
+      state.dataLoadingStatus = 'error';
     },
     boardCreated(state, action: PayloadAction<Board>) {
       state.boards.push(action.payload);
@@ -116,15 +119,27 @@ const boardsSlice = createSlice({
       state.modalActive = action.payload;
     },
   },
+  extraReducers: {
+    [fetchBoards.fulfilled.type]: (state, action: PayloadAction<Board[]>) => {
+      state.boards = action.payload;
+      state.boardsLoadingStatus = 'idle';
+    },
+    [fetchBoards.rejected.type]: (state) => {
+      state.boardsLoadingStatus = 'error';
+    },
+    [fetchBoards.pending.type]: (state) => {
+      state.boardsLoadingStatus = 'loading';
+    },
+  },
 });
 
 const {actions, reducer} = boardsSlice;
 
 export default reducer;
 export const {
-  boardsFetching,
-  boardsFetched,
-  boardsFetchingError,
+  dataFetching,
+  //boardsFetched,
+  dataFetchingError,
   boardCreated,
   boardDeleted,
   boardUpdated,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {activeBoardChanged, boardDeleted} from 'src/slices/boardsSlice/boardsSlice';
+import {activeBoardChanged, boardDeleted} from 'src/store/reducers/boardsSlice/boardsSlice';
 import BoardAddForm from '../BoardAddForm';
 
 import './sidebar.scss';

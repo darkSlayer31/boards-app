@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 
 import CommentsList from '../CommentsList';
 import CommentsAddForm from '../CommentsAddForm';
-import {taskUpdated, activeTaskChanged} from '../../slices/boardsSlice/boardsSlice';
+import {taskUpdated, activeTaskChanged} from '../../store/reducers/boardsSlice/boardsSlice';
 import {errorNotify} from '../Toaster';
 import {Task} from '../../types/types';
 

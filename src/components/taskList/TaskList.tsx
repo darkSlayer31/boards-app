@@ -2,7 +2,12 @@ import axios from 'axios';
 import {batch} from 'react-redux';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {taskDeleted, setModalActive, taskUpdated, activeTaskChanged} from '../../slices/boardsSlice/boardsSlice';
+import {
+  taskDeleted,
+  setModalActive,
+  taskUpdated,
+  activeTaskChanged,
+} from '../../store/reducers/boardsSlice/boardsSlice';
 import {errorNotify, warningNotify} from '../Toaster';
 import {Task} from '../../types/types';
 

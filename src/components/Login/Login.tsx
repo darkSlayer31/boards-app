@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {activeUserChanged} from '../../slices/usersSlice/usersSlise';
+import {activeUserChanged} from '../../store/reducers/usersSlice/usersSlise';
 import {errorNotify} from '../Toaster';
 
 type UserData = {

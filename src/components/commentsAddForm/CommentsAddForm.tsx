@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {Comment} from '../../types/types';
-import {commentCreated} from '../../slices/boardsSlice/boardsSlice';
+import {commentCreated} from '../../store/reducers/boardsSlice/boardsSlice';
 import {errorNotify, successNotify} from '../Toaster';
 
 type CommentsAddFormProps = {
