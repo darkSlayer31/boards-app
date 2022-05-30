@@ -44,7 +44,7 @@ const BoardRenameForm = () => {
         value={activeBoardName}
         onChange={(e: ChangeEvent<HTMLInputElement>) => setActiveBoardName(e.target.value)}
       />
-      <button className="btn" type="submit">
+      <button className="btn" type="submit" disabled={activeBoard?.name === activeBoardName}>
         Переименовать
       </button>
     </form>
